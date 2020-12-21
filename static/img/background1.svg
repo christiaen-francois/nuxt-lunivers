@@ -1,0 +1,21 @@
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="841" height="594.78" viewBox="0 0 841 594.78">
+  <defs>
+    <radialGradient id="Dégradé_sans_nom_2" data-name="Dégradé sans nom 2" cx="0" cy="595.28" r="1" gradientTransform="matrix(964.87, 0, 0, -964.87, -695.73, 574682.58)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1"/>
+    </radialGradient>
+    <mask id="mask" x="-175.39" y="-247.68" width="1191.78" height="1090.13" maskUnits="userSpaceOnUse">
+      <g transform="translate(-0.45 -0.25)">
+        <rect x="-71.37" y="-115.51" width="984.64" height="826.3" transform="translate(-71.37 144.65) rotate(-18)" fill="url(#Dégradé_sans_nom_2)"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path" transform="translate(-0.45 -0.25)">
+      <rect x="-8.56" y="-0.75" width="859" height="602.78" fill="none"/>
+    </clipPath>
+  </defs>
+  <g mask="url(#mask)">
+    <g clip-path="url(#clip-path)">
+      <rect width="841" height="594.78" fill="#ee2a7b"/>
+    </g>
+  </g>
+</svg>

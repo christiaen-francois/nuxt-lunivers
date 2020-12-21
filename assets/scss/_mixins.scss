@@ -1,0 +1,14 @@
+@mixin transitionPrefixMultiple($time, $properties...){
+	
+	$transition: ();
+	@each $property in $properties {
+		$transition: append(
+		$transition, ($property $time cubic-bezier(.4,0,.2,1)), $separator: comma);
+	}
+
+	-webkit-transition: $transition;
+	-moz-transition: $transition;
+	-ms-transition: $transition;
+	-o-transition: $transition;
+	transition: $transition;
+}

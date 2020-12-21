@@ -1,0 +1,16 @@
+$mq-breakpoints: (
+    small: 576px,
+    medium: 768px,
+    large: 992px,
+    xlarge: 1200px,
+    xxlarge: 1620px
+) !default;
+
+$color1: #EE2E7C;
+$color2: #01C8EE;
+$color3: #070423;
+
+$primary: $color1;
+$secondary: $color2;
+$light: #f1f1f1;
+$dark: $color3;

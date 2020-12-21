@@ -1,0 +1,146 @@
+@import '~/node_modules/bootstrap/scss/bootstrap.scss';
+@import '~/node_modules/bootstrap-vue/src/index.scss';
+@import '~/node_modules/locomotive-scroll/src/locomotive-scroll.scss';
+@import 'fonts';
+@import 'buttons';
+
+
+body{
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 16px;
+    word-spacing: 1px;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    background: $color3;
+    color: rgba(255,255,255,.45);
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+h1,.h1,
+h2,.h2,
+h3,.h3,
+h4,.h4{
+    font-weight: 500;
+    line-height: 1;
+    color: rgba(255,255,255,1);
+    @include transitionPrefixMultiple(.4s, all);
+}
+
+a{
+    color: #fff;
+    position: relative;
+
+    &::after{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: -2px;
+        width: 1px;
+        height: 1px;
+        background: $color1;
+        @include transitionPrefixMultiple(.2s, all);
+    }
+
+    &:hover{
+        color: #fff;
+        text-decoration: none;
+
+        &::after{
+            background: $color2;
+            height: 1px;
+            width: calc(100% + 10px);
+            left: -5px;
+        }
+    }
+}
+
+@media (min-width: 1680px){
+    .container {
+        max-width: 1360px;
+    }
+}
+@media (min-width: 1900px){
+    .container-xxl {
+        max-width: 1630px;
+    }
+}
+
+.inview{
+    opacity: 0;
+    @include transitionPrefixMultiple(.4s, opacity);
+}
+.is-inview{
+    opacity: 1;
+}
+
+
+header{
+
+    h1{
+        line-height: 1;
+
+        @include mq($from: xxlarge) {
+            font-size: 90px;
+            max-width: 50%;
+        }
+    }
+
+    &.header-full-height{
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    
+}
+.section-py{
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+}
+
+.content-with-caption{
+    position: relative;
+    padding-left: 2rem;
+
+    .content-caption{
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        text-transform: uppercase;
+
+        span{
+            display: inline-block;
+            transform: rotate(-90deg) translateX(-100%) translateY(calc(-100% - 20px));
+            transform-origin: top left;
+            pointer-events: none;
+        }
+    }
+}
+
+.layout-enter-active,
+.layout-leave-active {
+    @include transitionPrefixMultiple(.4s, opacity);
+}
+.layout-enter,
+.layout-leave-active {
+    opacity: 0;
+}
+
+#js-scroll {
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+}
