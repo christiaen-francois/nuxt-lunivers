@@ -17,7 +17,10 @@ body{
     background: $color3;
     color: rgba(255,255,255,.45);
     min-height: 100vh;
-    overflow: hidden;
+
+    @include mq($from: small) {
+        overflow: hidden;
+    }
 }
 
 *,
@@ -112,20 +115,25 @@ header{
 
 .content-with-caption{
     position: relative;
-    padding-left: 2rem;
+    
+    @include mq($from: medium) {
+        padding-left: 2rem;
+    }
 
     .content-caption{
-        position: absolute;
-        top: 0;
-        left: 0;
+        font-size: .9rem;
         margin: 0;
         text-transform: uppercase;
-
-        span{
-            display: inline-block;
-            transform: rotate(-90deg) translateX(-100%) translateY(calc(-100% - 20px));
-            transform-origin: top left;
-            pointer-events: none;
+        @include mq($from: medium) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            span{
+                display: inline-block;
+                transform: rotate(-90deg) translateX(-100%) translateY(calc(-100% - 20px));
+                transform-origin: top left;
+                pointer-events: none;
+            }
         }
     }
 }

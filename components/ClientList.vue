@@ -38,7 +38,11 @@ export default {
   li {
     position: relative;
     flex: 0 0 auto;
-    width: 20%;
+    width: 50%;
+
+    @include mq($from: medium) {
+      width: 20%;
+    }
 
     &::after {
       content: '';

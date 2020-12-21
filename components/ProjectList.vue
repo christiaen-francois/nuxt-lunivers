@@ -14,7 +14,6 @@
                 :projet="projet"
               />
             </ul>
-            <nuxt-link class="btn btn-primary" to="/projets">Projets</nuxt-link>
           </div>
         </div>
       </div>
@@ -38,14 +37,19 @@ export default {
   padding: 0;
   list-style: none;
   li {
-    font-size: 90px;
+    font-size: 2.8rem;
     line-height: 1;
-    margin: 2rem 0;
+    margin: 1rem 0;
 
-    &::before {
+    @include mq($from: medium) {
+      font-size: 90px;
+      margin: 2rem 0;
+    }
+
+    &:first-child {
       margin-top: 0;
     }
-    &::after {
+    &:last-child {
       margin-bottom: 0;
     }
   }

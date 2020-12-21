@@ -1,9 +1,9 @@
 <template>
-  <div id="js-scroll" class="page-wrapper">
+  <main id="js-scroll" class="page-wrapper">
     <Navigation />
     <Nuxt />
     <Background />
-  </div>
+  </main>
 </template>
 
 <script>

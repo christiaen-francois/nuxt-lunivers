@@ -9,7 +9,7 @@
     <section id="edito" class="section-py" data-scroll-section>
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 mb-5 mb-md-0">
             <div class="content-with-caption">
               <p
                 class="content-caption inview"
