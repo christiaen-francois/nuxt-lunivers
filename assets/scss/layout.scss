@@ -148,7 +148,10 @@ header{
 }
 
 #js-scroll {
-    overflow: hidden;
+    @include mq($from: small) {
+        overflow: hidden;
+    }
+    
     box-sizing: border-box;
     position: relative;
 }
