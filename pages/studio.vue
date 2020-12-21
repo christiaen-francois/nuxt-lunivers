@@ -5,9 +5,6 @@
         <h1 class="title">lunivers cherche à vous mettre en lumière.</h1>
       </div>
     </header>
-    <section id="team" class="section-py" data-scroll-section>
-      <div class="container"></div>
-    </section>
     <section id="services" class="section-py pb-0" data-scroll-section>
       <div class="container">
         <div class="row">
