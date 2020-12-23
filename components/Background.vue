@@ -267,7 +267,7 @@ export default {
   },
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 canvas {
   display: block;
   position: fixed;
