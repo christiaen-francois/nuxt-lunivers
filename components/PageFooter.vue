@@ -1,7 +1,7 @@
 <template>
-  <footer class="page-footer" data-scroll-section>
-    <div class="container">
-      <div class="row align-items-center inview" data-scroll>
+  <footer class="page-footer px-5">
+    <div class="container-fluid">
+      <div class="row align-items-center">
         <div class="col-md-4 offset-md-1 mb-4 mb-md-0">
           <h2>Houston nous avons la solution à votre problème.</h2>
         </div>
@@ -17,13 +17,38 @@
 </template>
 
 <script>
-export default {}
+export default {
+  mounted() {
+    this.animationFooter()
+  },
+  methods: {
+    animationFooter() {
+      const gsap = this.$gsap
+      const ScrollTrigger = this.$ScrollTrigger
+      gsap.registerPlugin(ScrollTrigger)
+
+      gsap.from('.page-footer .row', {
+        opacity: 0,
+        y: 100,
+        duration: 0.5,
+        ease: 'circ.inOut',
+        scrollTrigger: {
+          id: 'footerTrigger',
+          trigger: '.page-footer .container-fluid',
+          start: 'top 99%',
+          end: 'bottom top',
+          markers: true,
+        },
+      })
+    },
+  },
+}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .page-footer {
   padding-top: 15vh;
-  .container {
+  .container-fluid {
     overflow: hidden;
   }
   .row {
@@ -33,11 +58,6 @@ export default {}
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     color: #000;
-    transform: translateY(100%);
-    @include transitionPrefixMultiple(0.4s, all);
-    &.is-inview {
-      transform: translateY(0);
-    }
 
     a,
     h2 {

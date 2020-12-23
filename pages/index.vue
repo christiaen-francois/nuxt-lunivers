@@ -2,7 +2,7 @@
   <article data-scroll-container>
     <header class="header-full-height" data-scroll-section>
       <div class="container container-xxl">
-        <h1 class="title">studio de création graphique et web</h1>
+        <h1 class="title inview">studio de création graphique et web</h1>
       </div>
     </header>
     <ProjectList />
@@ -44,13 +44,39 @@
 </template>
 
 <script>
-import locomotive from '~/mixins/locomotive.js'
+// import locomotive from '~/mixins/locomotive.js'
 export default {
-  mixins: [locomotive],
+  mounted() {
+    this.animation()
+  },
+  methods: {
+    animation() {
+      const gsap = this.$gsap
+      const ScrollTrigger = this.$ScrollTrigger
+      const inviews = gsap.utils.toArray('.inview')
+      gsap.registerPlugin(ScrollTrigger)
+
+      inviews.forEach((inview) => {
+        gsap.from(inview, {
+          opacity: 0,
+          y: 100,
+          duration: 0.5,
+          ease: 'circ.inOut',
+          scrollTrigger: {
+            id: 'ScrollTrigger',
+            trigger: inview,
+            start: 'bottom bottom-=100',
+            end: 'bottom top',
+            markers: true,
+          },
+        })
+      })
+    },
+  },
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .links {
   padding-top: 15px;
   a {

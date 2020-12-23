@@ -182,14 +182,14 @@ export default {
 
       // Step 3
 
-      this.sphere = new THREE.Mesh(
-        new THREE.SphereGeometry(300, 10, 10),
-        new THREE.MeshNormalMaterial()
-      )
-      this.sphere.position.y = 0
-      this.sphere.position.z = 0
-      this.sphere.position.x = 500
-      this.scene.add(this.sphere)
+      // this.sphere = new THREE.Mesh(
+      //   new THREE.SphereGeometry(300, 10, 10),
+      //   new THREE.MeshNormalMaterial()
+      // )
+      // this.sphere.position.y = 0
+      // this.sphere.position.z = 0
+      // this.sphere.position.x = 500
+      // this.scene.add(this.sphere)
 
       // console.log(vertices);
 
@@ -255,9 +255,9 @@ export default {
       }
 
       // animer le cube
-      this.sphere.rotation.x += 0.01
-      this.sphere.rotation.y += 0.0025
-      this.sphere.rotation.z += 0.002
+      // this.sphere.rotation.x += 0.01
+      // this.sphere.rotation.y += 0.0025
+      // this.sphere.rotation.z += 0.002
 
       this.renderer.render(this.scene, this.camera)
     },
@@ -267,7 +267,7 @@ export default {
   },
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 canvas {
   display: block;
   position: fixed;
