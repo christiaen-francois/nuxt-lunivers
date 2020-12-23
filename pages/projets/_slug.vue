@@ -12,9 +12,7 @@
 
 <script>
 import find from 'lodash/find'
-import locomotive from '~/mixins/locomotive.js'
 export default {
-  mixins: [locomotive],
   computed: {
     projet() {
       return find(this.$store.state.projets.list, {

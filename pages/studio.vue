@@ -61,10 +61,7 @@
 </template>
 
 <script>
-import locomotive from '~/mixins/locomotive.js'
-export default {
-  mixins: [locomotive],
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>

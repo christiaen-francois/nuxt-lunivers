@@ -37,7 +37,7 @@ export default {
           trigger: '.page-footer .container-fluid',
           start: 'top 99%',
           end: 'bottom top',
-          markers: true,
+          // markers: true,
         },
       })
     },
@@ -45,7 +45,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .page-footer {
   padding-top: 15vh;
   .container-fluid {

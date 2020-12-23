@@ -67,7 +67,7 @@ export default {
             trigger: inview,
             start: 'bottom bottom-=100',
             end: 'bottom top',
-            markers: true,
+            // markers: true,
           },
         })
       })
