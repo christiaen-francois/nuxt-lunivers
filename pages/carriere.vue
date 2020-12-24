@@ -12,7 +12,7 @@
 <script>
 import global from '~/mixins/global.js'
 export default {
-  name: 'Studio',
+  name: 'Carriere',
   mixins: [global],
 }
 </script>

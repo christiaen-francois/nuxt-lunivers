@@ -1,11 +1,11 @@
 <template>
-  <article data-scroll-container>
-    <header class="" data-scroll-section>
+  <article>
+    <header class="">
       <div class="container">
         <h1 class="title">Projets</h1>
       </div>
     </header>
-    <section id="projets" class="section-py" data-scroll-section>
+    <section id="projets" class="section-py">
       <div class="container">Projet</div>
     </section>
     <ProjectList />
@@ -14,7 +14,11 @@
 </template>
 
 <script>
-export default {}
+import global from '~/mixins/global.js'
+export default {
+  name: 'HomePage',
+  mixins: [global],
+}
 </script>
 
 <style></style>

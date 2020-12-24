@@ -39,6 +39,14 @@
   </article>
 </template>
 
+<script>
+import global from '~/mixins/global.js'
+export default {
+  name: 'HomePage',
+  mixins: [global],
+}
+</script>
+
 <style lang="scss" scoped>
 .links {
   padding-top: 15px;
