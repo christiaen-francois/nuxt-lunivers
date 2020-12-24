@@ -4,29 +4,33 @@ export default {
       gsap: null,
       ScrollTrigger: null,
       elinviews: null,
+      markers: {
+        startColor: '#01C8EE',
+        endColor: '#EE2E7C',
+        fontSize: '10px',
+        fontWeight: 'normal',
+        indent: 20,
+      },
     }
   },
   mounted() {
     this.$nextTick(
       function () {
-        this.animation()
+        this.initAnimation()
+        this.ScrollTrigger.refresh()
       }.bind(this)
     )
   },
-  destroyed() {
-    const triggers = this.ScrollTrigger.getAll()
-    console.log(triggers)
-    triggers.forEach((trigger) => {
-      trigger.kill()
-    })
-  },
+  destroyed() {},
   methods: {
-    animation() {
+    initAnimation() {
       this.gsap = this.$gsap
       this.ScrollTrigger = this.$ScrollTrigger
       this.elinviews = this.gsap.utils.toArray('.inview')
       this.gsap.registerPlugin(this.ScrollTrigger)
-      this.ScrollTrigger.refresh()
+      this.destroyAnimation()
+
+      console.log('initAnimation')
 
       this.elinviews.forEach((inview) => {
         this.gsap.from(inview, {
@@ -41,13 +45,7 @@ export default {
             trigger: inview,
             start: 'top bottom',
             end: 'top 70%',
-            markers: {
-              startColor: 'white',
-              endColor: 'gold',
-              fontSize: '10px',
-              fontWeight: 'normal',
-              indent: 20,
-            },
+            // markers: this.markers,
           },
         })
       })
@@ -61,17 +59,18 @@ export default {
         scrollTrigger: {
           // once: true,
           id: 'footerTrigger',
-          trigger: '.page-footer .container-fluid',
+          trigger: '.page-footer .row',
           start: 'top bottom',
-          end: 'bottom top',
-          markers: {
-            startColor: 'white',
-            endColor: 'gold',
-            fontSize: '10px',
-            fontWeight: 'normal',
-            indent: 20,
-          },
+          end: 'bottom bottom',
+          // markers: this.markers,
         },
+      })
+    },
+    destroyAnimation() {
+      console.log('destroyAnimation')
+      const triggers = this.ScrollTrigger.getAll()
+      triggers.forEach((trigger) => {
+        trigger.kill()
       })
     },
   },
