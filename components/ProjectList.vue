@@ -1,10 +1,10 @@
 <template>
-  <section id="projets" class="section-py" data-scroll-section>
+  <section id="projets" class="section-py">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
           <div class="content-with-caption">
-            <p class="content-caption inview" data-scroll data-scroll-speed="1">
+            <p class="content-caption inview">
               <span>Dernières étoiles</span>
             </p>
             <ul v-if="projets" class="project-list">

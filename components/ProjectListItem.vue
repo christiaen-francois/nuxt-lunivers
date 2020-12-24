@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li class="inview">
     <nuxt-link :to="`/projets/${projet.slug}`">{{ projet.name }}</nuxt-link>
   </li>
 </template>

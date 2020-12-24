@@ -1,28 +1,22 @@
 <template>
-  <article data-scroll-container>
-    <header class="header-full-height" data-scroll-section>
+  <article>
+    <header class="header-full-height">
       <div class="container">
         <h1 class="title">lunivers cherche à vous mettre en lumière.</h1>
       </div>
     </header>
-    <section id="services" class="section-py pb-0" data-scroll-section>
+    <section id="services" class="section-py pb-0">
       <div class="container">
         <div class="row">
           <div class="col-md-5">
             <div class="content-with-caption">
-              <p
-                class="content-caption inview"
-                data-scroll
-                data-scroll-speed="1"
-              >
+              <p class="content-caption inview">
                 <span>la projection</span>
               </p>
-              <h2 class="inview" data-scroll>
-                les petits détails qui vous feront briller
-              </h2>
+              <h2 class="inview">les petits détails qui vous feront briller</h2>
             </div>
           </div>
-          <div class="col-md-5 offset-md-2 inview" data-scroll>
+          <div class="col-md-5 offset-md-2 inview">
             <p>
               Notre constante envie de fournir le meilleur nous permet de nous
               dépasser et vous proposer des projets pertinents et créatifs.
@@ -35,22 +29,22 @@
         <div class="row section-py pb-0">
           <div class="col-md-5">
             <ul class="service-list">
-              <li class="inview" data-scroll>identité & charte graphique</li>
-              <li class="inview" data-scroll>imprimés</li>
-              <li class="inview" data-scroll>lettrage</li>
-              <li class="inview" data-scroll>signalétique</li>
-              <li class="inview" data-scroll>iconographie</li>
-              <li class="inview" data-scroll>design interactif</li>
+              <li class="inview">identité & charte graphique</li>
+              <li class="inview">imprimés</li>
+              <li class="inview">lettrage</li>
+              <li class="inview">signalétique</li>
+              <li class="inview">iconographie</li>
+              <li class="inview">design interactif</li>
             </ul>
           </div>
           <div class="col-md-5 offset-md-2">
-            <ul class="service-list inview" data-scroll>
-              <li class="inview" data-scroll>webdesign</li>
-              <li class="inview" data-scroll>développement</li>
-              <li class="inview" data-scroll>expérience utilisateur (UX)</li>
-              <li class="inview" data-scroll>interface utilisateur (UI)</li>
-              <li class="inview" data-scroll>création wordpress sur mesure</li>
-              <li class="inview" data-scroll>site e-commerce</li>
+            <ul class="service-list inview">
+              <li class="inview">webdesign</li>
+              <li class="inview">développement</li>
+              <li class="inview">expérience utilisateur (UX)</li>
+              <li class="inview">interface utilisateur (UI)</li>
+              <li class="inview">création wordpress sur mesure</li>
+              <li class="inview">site e-commerce</li>
             </ul>
           </div>
         </div>
@@ -61,7 +55,11 @@
 </template>
 
 <script>
-export default {}
+import global from '~/mixins/global.js'
+export default {
+  name: 'Studio',
+  mixins: [global],
+}
 </script>
 
 <style lang="scss" scoped>

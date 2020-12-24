@@ -19,23 +19,26 @@
 <script>
 export default {
   mounted() {
-    this.animationFooter()
+    // this.animationFooter()
   },
   methods: {
     animationFooter() {
       const gsap = this.$gsap
       const ScrollTrigger = this.$ScrollTrigger
       gsap.registerPlugin(ScrollTrigger)
+      ScrollTrigger.refresh()
+      console.log('Footer Mounted haha')
 
       gsap.from('.page-footer .row', {
         opacity: 0,
         y: 100,
+        delay: 0.9,
         duration: 0.5,
         ease: 'circ.inOut',
         scrollTrigger: {
           id: 'footerTrigger',
           trigger: '.page-footer .container-fluid',
-          start: 'top 99%',
+          start: 'top bottom',
           end: 'bottom top',
           // markers: true,
         },
