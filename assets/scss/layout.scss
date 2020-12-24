@@ -14,6 +14,7 @@ body{
     box-sizing: border-box;
     background: $color3;
     color: rgba(255,255,255,.45);
+    touch-action: initial !important;
 }
 
 *,
