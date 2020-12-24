@@ -37,10 +37,10 @@ export default {
           scrollTrigger: {
             id: 'ScrollTrigger',
             scrub: 0.5,
-            once: true,
+            // once: true,
             trigger: inview,
             start: 'top bottom',
-            end: 'top 60%',
+            end: 'top 70%',
             markers: {
               startColor: 'white',
               endColor: 'gold',
@@ -57,13 +57,20 @@ export default {
         y: 100,
         delay: 0.9,
         duration: 0.5,
-        ease: 'circ.inOut',
+        // ease: 'circ.inOut',
         scrollTrigger: {
+          // once: true,
           id: 'footerTrigger',
           trigger: '.page-footer .container-fluid',
           start: 'top bottom',
           end: 'bottom top',
-          markers: true,
+          markers: {
+            startColor: 'white',
+            endColor: 'gold',
+            fontSize: '10px',
+            fontWeight: 'normal',
+            indent: 20,
+          },
         },
       })
     },
