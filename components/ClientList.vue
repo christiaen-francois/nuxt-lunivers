@@ -2,7 +2,11 @@
   <div data-scroll-section>
     <div class="container">
       <div class="content-with-caption">
-        <p class="content-caption inview" data-scroll data-scroll-speed="1">
+        <p
+          class="content-caption fade-in-up-osc"
+          data-scroll
+          data-scroll-speed="1"
+        >
           <span>étoiles</span>
         </p>
         <ul class="client-list">

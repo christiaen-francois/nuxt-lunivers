@@ -11,13 +11,25 @@
         <div class="col-xl-10 offset-xl-1">
           <ul class="menu-list">
             <li class="menu-item">
-              <nuxt-link to="/" class="menu-link">Accueil</nuxt-link>
+              <nuxt-link to="/" class="menu-link" @click.native="mobileToggle()"
+                >Accueil</nuxt-link
+              >
             </li>
             <li class="menu-item">
-              <nuxt-link to="/studio" class="menu-link">Studio</nuxt-link>
+              <nuxt-link
+                to="/studio"
+                class="menu-link"
+                @click.native="mobileToggle()"
+                >Studio</nuxt-link
+              >
             </li>
             <li class="menu-item">
-              <nuxt-link to="/projets" class="menu-link">Projets</nuxt-link>
+              <nuxt-link
+                to="/projets"
+                class="menu-link"
+                @click.native="mobileToggle()"
+                >Projets</nuxt-link
+              >
             </li>
           </ul>
         </div>
@@ -29,29 +41,43 @@
 export default {
   data() {
     return {
-      showMenu: false,
+      toggleState: false,
+      menutl: null,
     }
+  },
+  mounted() {
+    const mobileNavigation = document.querySelector('.header-navigation')
+    // const menuList = document.querySelector('.header-navigation ul')
+    const menuItems = document.querySelectorAll('.header-navigation ul li')
+
+    this.menutl = this.$gsap.timeline({ paused: true, reversed: true })
+    this.menutl.to(mobileNavigation, {
+      opacity: 1,
+      display: 'flex',
+      duration: 0.2,
+    })
+    this.menutl.from(menuItems, {
+      opacity: 0,
+      x: 50,
+      duration: 0.2,
+      stagger: 0.01,
+    })
   },
   methods: {
     mobileToggle(event) {
       const toggleBtn = document.querySelector('.mobile-toggler-btn')
-      const mobileNavigation = document.querySelector('.header-navigation')
-      const menuList = document.querySelector('.header-navigation ul')
-      const menuItems = document.querySelectorAll('.header-navigation ul li')
 
       if (!this.showMenu) {
         toggleBtn.classList.add('open')
-        mobileNavigation.classList.add('open')
-        menuList.classList.add('open')
-        menuItems.forEach((item) => item.classList.add('open'))
-        this.showMenu = true
+        this.menutl.play()
       } else {
         toggleBtn.classList.remove('open')
-        mobileNavigation.classList.remove('open')
-        menuList.classList.remove('open')
-        menuItems.forEach((item) => item.classList.remove('open'))
-        this.showMenu = false
+        this.menutl.reverse()
       }
+
+      this.$store.commit('menu/toggle')
+      this.showMenu = this.$store.state.menu.isOpen
+      // console.log(this.$store.state.menu.isOpen)
     },
   },
 }
@@ -131,40 +157,23 @@ nav {
     position: fixed;
     top: 0;
     left: 0;
+    display: none;
     width: 100%;
-    height: 0;
-    max-height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     background: rgba($color3, 0.95);
-    -webkit-backdrop-filter: blur(0) contrast(1);
-    backdrop-filter: blur(0) contrast(1);
     padding: 0;
     margin: 0;
+    opacity: 0;
     overflow-y: scroll;
     z-index: 10;
-    display: flex;
     -ms-flex-align: center;
     align-items: center;
-    @include transitionPrefixMultiple(0.4s, all);
-
-    &.menu {
-      visibility: hidden;
-
-      &.open {
-        height: 100vh;
-        visibility: visible;
-      }
-    }
 
     .menu-list {
       margin: 0;
       padding: 0;
       list-style: none;
-      transform: translateY(-100%);
-      @include transitionPrefixMultiple(0.4s, all);
-
-      &.open {
-        transform: translateY(0);
-      }
 
       li {
         font-size: 2.8rem;

@@ -18,6 +18,11 @@ import global from '~/mixins/global.js'
 export default {
   name: 'HomePage',
   mixins: [global],
+  head() {
+    return {
+      title: 'Projets',
+    }
+  },
 }
 </script>
 

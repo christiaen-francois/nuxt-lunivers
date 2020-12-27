@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-6">
           <div class="content-with-caption">
-            <p class="content-caption inview">
+            <p class="content-caption fade-in-up-osc">
               <span>Dernières étoiles</span>
             </p>
             <ul v-if="projets" class="project-list">

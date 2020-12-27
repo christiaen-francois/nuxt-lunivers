@@ -14,6 +14,11 @@ import global from '~/mixins/global.js'
 export default {
   name: 'Carriere',
   mixins: [global],
+  head() {
+    return {
+      title: 'Carrière',
+    }
+  },
 }
 </script>
 

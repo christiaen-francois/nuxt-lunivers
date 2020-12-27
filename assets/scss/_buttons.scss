@@ -1,34 +1,42 @@
-.btn{
-    border-radius: 0;
-    background-color: transparent;
-    border-color:transparent;
-    position: relative;
-    border: none;
-    padding: 0.75rem 1.25rem;
+.btn {
+  border-radius: 0;
+  background-color: transparent;
+  border-color: transparent;
+  position: relative;
+  border: none;
+  padding: 0.75rem 1.25rem;
 
-    &::after{
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 20px;
-        height: 2px;
-        background: $color1;
-        @include transitionPrefixMultiple(.2s, all);
-    }
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 20px;
+    height: 2px;
+    background: $color1;
+    @include transitionPrefixMultiple(0.2s, all);
+  }
 }
 
-.btn-primary{
+.btn-primary {
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
 
-    &:hover,
-    &:focus{
-        background-color: transparent;
-        border-color:transparent;
-
-        &::after{
-            background: $color2;
-            width: calc(100% + 10px);
-            left: -10px;
-        }
+    &::after {
+      background: $color2;
+      width: calc(100% + 10px);
+      left: -10px;
     }
+  }
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: transparent;
+  border-color: transparent;
 }

@@ -23,6 +23,11 @@ export default {
       })
     },
   },
+  head() {
+    return {
+      title: 'Projet',
+    }
+  },
 }
 </script>
 

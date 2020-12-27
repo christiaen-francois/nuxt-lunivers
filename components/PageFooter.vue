@@ -1,15 +1,17 @@
 <template>
-  <footer class="page-footer px-5">
+  <footer class="page-footer">
     <div class="container-fluid">
-      <div class="row align-items-center">
-        <div class="col-md-4 offset-md-1 mb-4 mb-md-0">
-          <h2>Houston nous avons la solution à votre problème.</h2>
-        </div>
-        <div class="col-md-4 offset-md-2">
-          <a href="#" class="btn btn-primary">Etablir le contact</a>
-          <p>
-            <small>Contact imminent.... Je répète, contact imminent!</small>
-          </p>
+      <div class="page-footer-inner">
+        <div class="row align-items-center">
+          <div class="col-md-4 offset-md-1 mb-4 mb-md-0">
+            <h2>Houston nous avons la solution à votre problème.</h2>
+          </div>
+          <div class="col-md-4 offset-md-2">
+            <a href="#" class="btn btn-primary">Etablir le contact</a>
+            <p>
+              <small>Contact imminent.... Je répète, contact imminent!</small>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -17,34 +19,10 @@
 </template>
 
 <script>
+import footerAnim from '~/mixins/footerAnim.js'
 export default {
-  mounted() {
-    // this.animationFooter()
-  },
-  methods: {
-    animationFooter() {
-      const gsap = this.$gsap
-      const ScrollTrigger = this.$ScrollTrigger
-      gsap.registerPlugin(ScrollTrigger)
-      ScrollTrigger.refresh()
-      console.log('Footer Mounted haha')
-
-      gsap.from('.page-footer .row', {
-        opacity: 0,
-        y: 100,
-        delay: 0.9,
-        duration: 0.5,
-        ease: 'circ.inOut',
-        scrollTrigger: {
-          id: 'footerTrigger',
-          trigger: '.page-footer .container-fluid',
-          start: 'top bottom',
-          end: 'bottom top',
-          // markers: true,
-        },
-      })
-    },
-  },
+  name: 'PageFooter',
+  mixins: [footerAnim],
 }
 </script>
 
@@ -54,24 +32,22 @@ export default {
   .container-fluid {
     overflow: hidden;
   }
-  .row {
+  .page-footer-inner {
     padding-top: 10vh;
     padding-bottom: 10vh;
     background: #fff;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     color: #000;
-
-    a,
-    h2 {
-      color: #000;
-    }
-
-    h2 {
-      margin: 0;
-    }
+  }
+  a,
+  h2 {
+    color: #000;
   }
 
+  h2 {
+    margin: 0;
+  }
   address {
     margin: 0;
   }

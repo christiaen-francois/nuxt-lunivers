@@ -16,7 +16,6 @@ export default {
   mounted() {
     this.$nextTick(
       function () {
-        console.log('BAM BAM BAM')
         this.initAnimation()
       }.bind(this)
     )
@@ -34,25 +33,22 @@ export default {
     initAnimation() {
       this.gsap = this.$gsap
       this.ScrollTrigger = this.$ScrollTrigger
-      this.elinviews = this.gsap.utils.toArray('.fade-in-up-osc')
       this.gsap.registerPlugin(this.ScrollTrigger)
 
-      this.elinviews.forEach((inview) => {
-        this.gsap.from(inview, {
-          opacity: 0,
-          y: 50,
-          duration: 0.5,
-          //   ease: 'circ.inOut',
-          scrollTrigger: {
-            id: 'ScrollTrigger',
-            scrub: 0.5,
-            // once: true,
-            trigger: inview,
-            start: 'top bottom',
-            end: 'top 70%',
-            // markers: this.markers,
-          },
-        })
+      this.gsap.from('.page-footer .page-footer-inner', {
+        opacity: 0,
+        y: 100,
+        delay: 0.5,
+        duration: 0.5,
+        // ease: 'circ.inOut',
+        scrollTrigger: {
+          // once: true,
+          id: 'footerTrigger',
+          trigger: '.page-footer .page-footer-inner',
+          start: 'top bottom',
+          end: 'bottom bottom',
+          // markers: this.markers,
+        },
       })
     },
     refreshAnimation() {

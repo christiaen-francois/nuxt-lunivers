@@ -10,13 +10,15 @@
         <div class="row">
           <div class="col-md-5">
             <div class="content-with-caption">
-              <p class="content-caption inview">
+              <p class="content-caption fade-in-up-osc">
                 <span>la projection</span>
               </p>
-              <h2 class="inview">les petits détails qui vous feront briller</h2>
+              <h2 class="fade-in-up-osc">
+                les petits détails qui vous feront briller
+              </h2>
             </div>
           </div>
-          <div class="col-md-5 offset-md-2 inview">
+          <div class="col-md-5 offset-md-2 fade-in-up-osc">
             <p>
               Notre constante envie de fournir le meilleur nous permet de nous
               dépasser et vous proposer des projets pertinents et créatifs.
@@ -29,22 +31,22 @@
         <div class="row section-py pb-0">
           <div class="col-md-5">
             <ul class="service-list">
-              <li class="inview">identité & charte graphique</li>
-              <li class="inview">imprimés</li>
-              <li class="inview">lettrage</li>
-              <li class="inview">signalétique</li>
-              <li class="inview">iconographie</li>
-              <li class="inview">design interactif</li>
+              <li class="fade-in-up-osc">identité & charte graphique</li>
+              <li class="fade-in-up-osc">imprimés</li>
+              <li class="fade-in-up-osc">lettrage</li>
+              <li class="fade-in-up-osc">signalétique</li>
+              <li class="fade-in-up-osc">iconographie</li>
+              <li class="fade-in-up-osc">design interactif</li>
             </ul>
           </div>
           <div class="col-md-5 offset-md-2">
-            <ul class="service-list inview">
-              <li class="inview">webdesign</li>
-              <li class="inview">développement</li>
-              <li class="inview">expérience utilisateur (UX)</li>
-              <li class="inview">interface utilisateur (UI)</li>
-              <li class="inview">création wordpress sur mesure</li>
-              <li class="inview">site e-commerce</li>
+            <ul class="service-list">
+              <li class="fade-in-up-osc">webdesign</li>
+              <li class="fade-in-up-osc">développement</li>
+              <li class="fade-in-up-osc">expérience utilisateur (UX)</li>
+              <li class="fade-in-up-osc">interface utilisateur (UI)</li>
+              <li class="fade-in-up-osc">création wordpress sur mesure</li>
+              <li class="fade-in-up-osc">site e-commerce</li>
             </ul>
           </div>
         </div>
@@ -59,6 +61,11 @@ import global from '~/mixins/global.js'
 export default {
   name: 'Studio',
   mixins: [global],
+  head() {
+    return {
+      title: 'Studio',
+    }
+  },
 }
 </script>
 

@@ -1,22 +1,21 @@
 <template>
   <article>
     <header class="header-full-height">
-      <div class="container container-xxl">
-        <h1 class="title inview">studio de création graphique et web</h1>
+      <div class="container container-xxl text-center">
+        <p class="h1">travailler avec finesse</p>
       </div>
     </header>
-    <ProjectList />
     <section id="edito" class="section-py">
       <div class="container">
         <div class="row">
           <div class="col-md-6 mb-5 mb-md-0">
             <div class="content-with-caption">
-              <p class="content-caption inview">
+              <p class="content-caption fade-in-up-osc">
                 <span>Valeurs</span>
               </p>
               <h2>
-                lunivers est une épicerie fine pour laquelle nous œuvrons avec
-                passion et l'envie de toujours faire mieux.
+                Une équipe solide de graphistes et développeurs web pour
+                imaginer et créer votre demain
               </h2>
             </div>
           </div>
@@ -34,6 +33,7 @@
         </div>
       </div>
     </section>
+    <ProjectList />
     <ClientList />
     <PageFooter />
   </article>
@@ -44,6 +44,21 @@ import global from '~/mixins/global.js'
 export default {
   name: 'HomePage',
   mixins: [global],
+  data() {
+    return {
+      wonders: [
+        'travailler avec finesse',
+        'œuvrer avec passion',
+        'vous proproser le meilleur',
+      ],
+    }
+  },
+  head() {
+    return {
+      title:
+        'Agence de graphisme et création de sites web de caractère - Weiswampach',
+    }
+  },
 }
 </script>
 

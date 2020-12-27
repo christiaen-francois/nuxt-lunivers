@@ -1,5 +1,5 @@
 <template>
-  <li class="inview">
+  <li class="fade-in-up-osc">
     <nuxt-link :to="`/projets/${projet.slug}`">{{ projet.name }}</nuxt-link>
   </li>
 </template>
