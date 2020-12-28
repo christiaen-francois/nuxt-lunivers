@@ -81,7 +81,7 @@
         url="https://f7jecx6r9fp.typeform.com/to/UpLbrgsH"
         :hide-headers="true"
         :hide-footer="true"
-        :button-text="Envoyer"
+        :button-text="Send"
         :opacity="0"
         :on-submit="onSubmit"
       />
@@ -243,11 +243,14 @@ export default {
 nav {
   position: fixed;
   width: 100%;
-  height: 0;
   top: 0;
   left: 0;
-  padding: 2rem 2rem 0 2rem;
+  padding: 1rem 1rem 0 1.5rem;
   z-index: 200;
+
+  @include mq($from: small) {
+    padding: 2rem 2rem 0 2rem;
+  }
 
   .nav-inner {
     position: relative;
@@ -259,10 +262,14 @@ nav {
   .mobile-toggler {
     position: relative;
     z-index: 11;
-    margin-right: 3rem;
+    margin-right: 1.5rem;
     cursor: pointer;
     width: 2rem;
-    height: 1.4rem;
+    height: 1.1rem;
+
+    @include mq($from: small) {
+      margin-right: 3rem;
+    }
 
     &-btn {
       position: absolute;
@@ -328,7 +335,7 @@ nav {
     z-index: 12;
 
     @include mq($until: small) {
-      margin-bottom: 3rem;
+      padding-bottom: 3rem;
     }
     & > div,
     iframe {
@@ -385,10 +392,14 @@ nav {
 
   .title-wrapper {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    display: none;
+
+    @include mq($from: small) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
     .title {
       display: block;
@@ -417,6 +428,7 @@ nav {
     height: 54px;
     background-color: #fff;
     border-radius: 100%;
+    border-top-right-radius: 0;
     margin-left: calc(16.6px + 0.14118vw);
     pointer-events: none;
     overflow: hidden;
