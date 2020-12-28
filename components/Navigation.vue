@@ -77,34 +77,14 @@
       </div>
     </div>
     <div class="header-contact">
-      <div
-        class="typeform-widget"
-        data-url="https://form.typeform.com/to/UpLbrgsH?typeform-medium=embed-snippet"
-        data-transparency="100"
-        data-hide-footer="true"
-        style="width: 100%; height: 100%"
-      ></div>
-      <script>
-        ;(function () {
-          var qs,
-            js,
-            q,
-            s,
-            d = document,
-            gi = d.getElementById,
-            ce = d.createElement,
-            gt = d.getElementsByTagName,
-            id = 'typef_orm',
-            b = 'https://embed.typeform.com/'
-          if (!gi.call(d, id)) {
-            js = ce.call(d, 'script')
-            js.id = id
-            js.src = b + 'embed.js'
-            q = gt.call(d, 'script')[0]
-            q.parentNode.insertBefore(js, q)
-          }
-        })()
-      </script>
+      <Typeform
+        url="https://f7jecx6r9fp.typeform.com/to/UpLbrgsH"
+        :hide-headers="true"
+        :hide-footer="true"
+        :button-text="Envoyer"
+        :opacity="0"
+        :on-submit="onSubmit"
+      />
     </div>
   </nav>
 </template>
@@ -347,6 +327,10 @@ nav {
   .header-contact {
     z-index: 12;
 
+    @include mq($until: small) {
+      margin-bottom: 3rem;
+    }
+    & > div,
     iframe {
       height: 100%;
       width: 100%;

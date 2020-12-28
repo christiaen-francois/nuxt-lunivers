@@ -48,6 +48,7 @@ export default {
     '@nuxt/content',
     '@nuxtjs/style-resources',
     'nuxt-gsap-module',
+    'nuxt-typeform',
   ],
 
   gsap: {
