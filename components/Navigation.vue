@@ -76,7 +76,36 @@
         <div class="col-xl-3 col">Adresse</div>
       </div>
     </div>
-    <div class="header-contact"></div>
+    <div class="header-contact">
+      <div
+        class="typeform-widget"
+        data-url="https://form.typeform.com/to/UpLbrgsH?typeform-medium=embed-snippet"
+        data-transparency="100"
+        data-hide-footer="true"
+        style="width: 100%; height: 100%"
+      ></div>
+      <script>
+        ;(function () {
+          var qs,
+            js,
+            q,
+            s,
+            d = document,
+            gi = d.getElementById,
+            ce = d.createElement,
+            gt = d.getElementsByTagName,
+            id = 'typef_orm',
+            b = 'https://embed.typeform.com/'
+          if (!gi.call(d, id)) {
+            js = ce.call(d, 'script')
+            js.id = id
+            js.src = b + 'embed.js'
+            q = gt.call(d, 'script')[0]
+            q.parentNode.insertBefore(js, q)
+          }
+        })()
+      </script>
+    </div>
   </nav>
 </template>
 <script>
@@ -124,6 +153,7 @@ export default {
      * Contact menu toggle animation
      */
     const contact = document.querySelector('.header-contact')
+    // const contactForm = document.querySelector('.header-contact .typeform-widget')
     const svgWrapper = document.querySelector('.svg-wrapper')
     const iconClose = document.querySelector('.close-icon')
     const titleOpen = document.querySelector('.title.open')
@@ -131,8 +161,8 @@ export default {
     this.contacttl = this.$gsap.timeline({
       paused: true,
       reversed: true,
-      onComplete: this.completeFunction,
-      onReverseComplete: this.reverseFunction,
+      // onComplete: this.completeFunction,
+      // onReverseComplete: this.reverseFunction,
     })
     this.contacttl.to(contact, {
       opacity: 1,
@@ -178,9 +208,11 @@ export default {
 
       if (!this.toggleState) {
         toggleBtn.classList.add('open')
+        document.body.classList.add('has-overlay')
         this.menutl.play()
       } else {
         toggleBtn.classList.remove('open')
+        document.body.classList.remove('has-overlay')
         this.menutl.reverse()
       }
 
@@ -189,9 +221,13 @@ export default {
       // console.log(this.$store.state.menu.isOpen)
     },
     contactToggle(event) {
-      this.contacttl.reversed()
-        ? this.contacttl.play()
-        : this.contacttl.reverse()
+      if (this.contacttl.reversed()) {
+        document.body.classList.add('has-overlay')
+        this.contacttl.play()
+      } else {
+        document.body.classList.remove('has-overlay')
+        this.contacttl.reverse()
+      }
       console.log(event)
     },
     completeFunction() {
@@ -199,11 +235,13 @@ export default {
       const iframe = document.createElement('iframe')
       const gsap = this.gsap
       iframe.src = this.typeForm
+      iframe.id = 'typeform-full'
       // iframe.setAttribute('width', '100%')
       iframe.style.width = '100%'
       iframe.style.height = '100%'
       iframe.style.opacity = '0'
-      iframe.frameBorder = 'none'
+      iframe.frameBorder = '0'
+      iframe.allow = 'camera; microphone; autoplay; encrypted-media;'
       contact.appendChild(iframe)
       iframe.addEventListener('load', function (e) {
         const iframetl = gsap.timeline()
