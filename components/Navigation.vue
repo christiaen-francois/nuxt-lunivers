@@ -80,7 +80,7 @@
       <Typeform
         url="https://f7jecx6r9fp.typeform.com/to/UpLbrgsH"
         :hide-headers="true"
-        :hide-footer="true"
+        :hide-footer="false"
         :button-text="Send"
         :opacity="0"
         :on-submit="onSubmit"
@@ -90,6 +90,7 @@
 </template>
 <script>
 export default {
+  name: 'Navigation',
   data() {
     return {
       gsap: null,

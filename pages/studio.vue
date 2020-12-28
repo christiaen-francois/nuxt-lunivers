@@ -78,6 +78,16 @@ export default {
   li {
     font-size: 3rem;
     font-weight: 200;
+    line-height: 1;
+    margin: 1.5rem 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 </style>
