@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article ref="someName" class="page-content">
     <header class="header-full-height">
       <div class="container">
         <h1 class="title">lunivers cherche à vous mettre en lumière.</h1>

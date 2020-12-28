@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article ref="someName" class="page-content">
     <header class="header-full-height">
       <div class="container">
         <h1 class="title">{{ projet.name }}</h1>

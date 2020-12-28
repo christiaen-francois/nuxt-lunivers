@@ -16,8 +16,9 @@ export default {
   mounted() {
     this.$nextTick(
       function () {
-        console.log('BAM BAM BAM')
         this.initAnimation()
+        // this.$store.commit('menu/refreshPageContentEl', this.$refs.someName)
+        // console.log(this.$refs.someName)
       }.bind(this)
     )
   },

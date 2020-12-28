@@ -67,12 +67,13 @@
 <style lang="scss">
 #LuniversLogo {
   animation: 1s appear;
-  margin: auto;
+  margin: 0 auto 0 0;
   width: 100px;
   height: auto;
 }
 
 .brand-link {
+  margin: 0 auto 0 0;
   &::after {
     display: none;
   }
