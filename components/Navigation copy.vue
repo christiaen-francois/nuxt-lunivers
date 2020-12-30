@@ -1,9 +1,8 @@
 <template>
   <nav role="navigation" aria-label="Menu principal">
-    {{ contactVisibility }}
     <div class="nav-inner">
       <Logo />
-      <div class="mobile-toggler" @click.prevent="menuToggle($event)">
+      <div class="mobile-toggler" @click.prevent="mobileToggle($event)">
         <span class="mobile-toggler-btn"></span>
       </div>
       <button class="contact-btn" @click.prevent="contactToggle($event)">
@@ -46,13 +45,13 @@
     </div>
     <div class="menu header-navigation">
       <div class="row align-items-end w-100">
-        <div class="col-xl-7 offset-xl-2 col-content">
+        <div class="col-xl-7 offset-xl-2 col">
           <ul class="menu-list">
             <li class="menu-item">
               <nuxt-link
                 to="/"
                 class="menu-link"
-                @click.native="menuToggle($event)"
+                @click.native="mobileToggle($event)"
                 >Accueil</nuxt-link
               >
             </li>
@@ -60,7 +59,7 @@
               <nuxt-link
                 to="/studio"
                 class="menu-link"
-                @click.native="menuToggle($event)"
+                @click.native="mobileToggle($event)"
                 >Studio</nuxt-link
               >
             </li>
@@ -68,92 +67,54 @@
               <nuxt-link
                 to="/projets"
                 class="menu-link"
-                @click.native="menuToggle($event)"
+                @click.native="mobileToggle($event)"
                 >Projets</nuxt-link
               >
             </li>
           </ul>
         </div>
-        <div class="col-xl-3 col-content">Adresse</div>
+        <div class="col-xl-3 col">Adresse</div>
       </div>
     </div>
-    <div class="header-contact">
-      <div class="header-contact-inner">
-        <!-- <iframe
-          id="typeform-full"
-          width="100%"
-          height="100%"
-          frameborder="0"
-          allow="camera; microphone; autoplay; encrypted-media;"
-          src="https://form.typeform.com/to/UpLbrgsH?typeform-medium=embed-snippet"
-        ></iframe>
-        <script
-          type="text/javascript"
-          src="https://embed.typeform.com/embed.js"
-        ></script> -->
-      </div>
-    </div>
+    <div class="header-contact"></div>
   </nav>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
-
 export default {
   name: 'Navigation',
   data() {
     return {
+      gsap: null,
+      toggleState: false,
       menutl: null,
       contacttl: null,
       typeForm:
         'https://form.typeform.com/to/UpLbrgsH?typeform-medium=embed-snippet',
     }
   },
-  computed: {
-    ...mapState({
-      menuVisibility: (state) => state.navigation.menuVisibility,
-      contactVisibility: (state) => state.navigation.contactVisibility,
-    }),
-  },
-  watch: {
-    contactVisibility(newValue, oldValue) {
-      // console.log(`Updating from ${oldValue} to ${newValue}`)
-      if (newValue === true) {
-        this.contacttl.play()
-      } else {
-        this.contacttl.reverse()
-      }
-      if (this.menuVisibility) {
-        this.menuToggle()
-      }
-      this.bodyOverflow()
-    },
-  },
   mounted() {
+    this.gsap = this.$gsap
     /**
      * Mobile menu toggle animation
      */
-
-    const navigation = document.querySelector('.header-navigation')
-    const navigationContents = document.querySelectorAll(
-      '.header-navigation .col-content'
-    )
-    const navigationMenuItems = document.querySelectorAll(
-      '.header-navigation ul li'
-    )
+    const nav = document.querySelector('.header-navigation')
+    const navCols = document.querySelectorAll('.header-navigation .col')
+    const navMenuItems = document.querySelectorAll('.header-navigation ul li')
+    // const menuList = document.querySelector('.header-navigation ul')
 
     this.menutl = this.$gsap.timeline({ paused: true, reversed: true })
-    this.menutl.to(navigation, {
+    this.menutl.to(nav, {
       opacity: 1,
       display: 'flex',
       duration: 0.2,
     })
-    this.menutl.from(navigationContents, {
+    this.menutl.from(navCols, {
       opacity: 0,
       x: 50,
       duration: 0.4,
       stagger: 0.05,
     })
-    this.menutl.from(navigationMenuItems, {
+    this.menutl.from(navMenuItems, {
       opacity: 0,
       x: 50,
       duration: 0.2,
@@ -172,8 +133,8 @@ export default {
     this.contacttl = this.$gsap.timeline({
       paused: true,
       reversed: true,
-      // onComplete: this.completeFunction,
-      // onReverseComplete: this.reverseFunction,
+      onComplete: this.completeFunction,
+      onReverseComplete: this.reverseFunction,
     })
     this.contacttl.to(contact, {
       opacity: 1,
@@ -214,31 +175,58 @@ export default {
     )
   },
   methods: {
-    ...mapMutations('navigation', [
-      'ToggleMenuVisibility',
-      'ToggleContactVisibility',
-    ]), // https://stackoverflow.com/questions/60335163/how-to-correctly-use-nuxt-vue-mapmutations
-    menuToggle(event) {
+    mobileToggle(event) {
       const toggleBtn = document.querySelector('.mobile-toggler-btn')
-      if (!this.menuVisibility) {
+
+      if (!this.toggleState) {
         toggleBtn.classList.add('open')
+        document.body.classList.add('has-overlay')
         this.menutl.play()
       } else {
         toggleBtn.classList.remove('open')
+        document.body.classList.remove('has-overlay')
         this.menutl.reverse()
       }
-      this.ToggleMenuVisibility()
-      this.bodyOverflow()
+
+      this.$store.commit('menu/toggle')
+      this.toggleState = this.$store.state.menu
+      // console.log(this.$store.state.menu.isOpen)
     },
     contactToggle(event) {
-      this.ToggleContactVisibility()
-    },
-    bodyOverflow() {
-      if (this.menuVisibility || this.contactVisibility) {
+      if (this.contacttl.reversed()) {
         document.body.classList.add('has-overlay')
+        this.contacttl.play()
       } else {
         document.body.classList.remove('has-overlay')
+        this.contacttl.reverse()
       }
+      console.log(event)
+    },
+    completeFunction() {
+      const contact = document.querySelector('.header-contact')
+      const iframe = document.createElement('iframe')
+      const gsap = this.gsap
+      iframe.src = this.typeForm
+      iframe.id = 'typeform-full'
+      // iframe.setAttribute('width', '100%')
+      iframe.style.width = '100%'
+      iframe.style.height = '100%'
+      iframe.style.opacity = '0'
+      iframe.frameBorder = '0'
+      iframe.allow = 'camera; microphone; autoplay; encrypted-media;'
+      contact.appendChild(iframe)
+      iframe.addEventListener('load', function (e) {
+        const iframetl = gsap.timeline()
+        iframetl.to(iframe, {
+          opacity: 1,
+          duration: 0.5,
+        })
+      })
+    },
+    reverseFunction() {
+      const contactIframe = document.querySelector('.header-contact iframe')
+      contactIframe.remove()
+      console.log('reverseFunction')
     },
   },
 }
@@ -508,9 +496,6 @@ nav {
     transform: translateY(75%);
     display: block;
     will-change: transform;
-  }
-  div[class*='mobile-modal__Wrapper'] {
-    padding-bottom: 3rem;
   }
 }
 </style>

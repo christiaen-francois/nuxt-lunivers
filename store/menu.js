@@ -4,10 +4,11 @@ export const state = () => ({
 })
 
 export const mutations = {
-  refreshPageContentEl(state, el) {
-    state.pageContentEl = el
+  // methodName(state, payload)
+  refreshPageContentEl(state, payload) {
+    state.pageContentEl = payload
   },
-  toggle(state) {
+  toggle(state, payload) {
     state.isOpen = !state.isOpen
   },
 }

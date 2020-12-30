@@ -7,7 +7,12 @@
             <h2>Houston nous avons la solution à votre problème.</h2>
           </div>
           <div class="col-md-4 offset-md-2">
-            <a href="#" class="btn btn-primary">Etablir le contact</a>
+            <a
+              href="#"
+              class="btn btn-primary"
+              @click.prevent="menuToggle($event)"
+              >Etablir le contact</a
+            >
             <p>
               <small>Contact imminent.... Je répète, contact imminent!</small>
             </p>
@@ -19,10 +24,26 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from 'vuex'
 import footerAnim from '~/mixins/footerAnim.js'
 export default {
   name: 'PageFooter',
   mixins: [footerAnim],
+  computed: {
+    ...mapState({
+      menuVisibility: (state) => state.navigation.menuVisibility,
+      contactVisibility: (state) => state.navigation.contactVisibility,
+    }),
+  },
+  methods: {
+    ...mapMutations('navigation', ['ToggleContactVisibility']), // https://stackoverflow.com/questions/60335163/how-to-correctly-use-nuxt-vue-mapmutations
+    ...mapActions('navigation', ['ToggleContactVisibilityAction']),
+    menuToggle(event) {
+      // this.ToggleMenuVisibility()
+      const gsap = this.$gsap
+      this.ToggleContactVisibilityAction(gsap)
+    },
+  },
 }
 </script>
 
