@@ -39,9 +39,7 @@ export default {
     ...mapMutations('navigation', ['ToggleContactVisibility']), // https://stackoverflow.com/questions/60335163/how-to-correctly-use-nuxt-vue-mapmutations
     ...mapActions('navigation', ['ToggleContactVisibilityAction']),
     menuToggle(event) {
-      // this.ToggleMenuVisibility()
-      const gsap = this.$gsap
-      this.ToggleContactVisibilityAction(gsap)
+      this.ToggleContactVisibilityAction()
     },
   },
 }

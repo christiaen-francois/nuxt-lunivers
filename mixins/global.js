@@ -1,9 +1,11 @@
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
       gsap: null,
       ScrollTrigger: null,
       elinviews: null,
+      pageContentTimeline: null,
       markers: {
         startColor: '#01C8EE',
         endColor: '#EE2E7C',
@@ -17,14 +19,31 @@ export default {
     this.$nextTick(
       function () {
         this.initAnimation()
-        // this.$store.commit('menu/refreshPageContentEl', this.$refs.someName)
-        // console.log(this.$refs.someName)
+        const pageContent = this.$refs.someName
+
+        this.pageContentTimeline = this.$gsap.timeline({
+          paused: true,
+          reversed: true,
+        })
+        this.pageContentTimeline.to(pageContent, {
+          opacity: 0,
+          duration: 0.2,
+        })
       }.bind(this)
     )
+  },
+  computed: {
+    ...mapState({
+      overlayOpen: (state) => state.navigation.overlayOpen,
+    }),
   },
   watch: {
     $route() {
       this.refreshAnimation()
+    },
+    overlayOpen(newValue, oldValue) {
+      this.toggleContentVisibility(newValue)
+      // console.log(`Updating from ${oldValue} to ${newValue}`)
     },
   },
   destroyed() {
@@ -64,6 +83,14 @@ export default {
       triggers.forEach((trigger) => {
         trigger.kill()
       })
+    },
+    toggleContentVisibility(nv) {
+      console.log('toggleContentVisibility', nv)
+      if (nv) {
+        this.pageContentTimeline.play()
+      } else {
+        this.pageContentTimeline.reverse()
+      }
     },
   },
 }

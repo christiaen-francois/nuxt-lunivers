@@ -1,47 +1,29 @@
 export const state = () => ({
   menuVisibility: false,
   contactVisibility: false,
-  contactTimeline: null,
+  overlayOpen: false,
 })
 
 export const mutations = {
   // methodName(state, payload)
   ToggleMenuVisibility(state, payload) {
     state.menuVisibility = !state.menuVisibility
+    state.overlayOpen = !state.overlayOpen
   },
   ToggleContactVisibility(state, payload) {
     state.contactVisibility = !state.contactVisibility
-  },
-  gsapContactTimeline(state, payload) {
-    // const gsap = payload
-    // state.contactTimeline = gsap.timeline({
-    //   paused: true,
-    //   reversed: true,
-    // })
+    state.overlayOpen = !state.overlayOpen
   },
 }
 
 export const getters = {
   getMenuVisibility: (state) => state.menuVisibility,
   getContactVisibility: (state) => state.contactVisibility,
+  getOverlayOpen: (state) => state.overlayOpen,
 }
 
 export const actions = {
   ToggleContactVisibilityAction({ commit, state }, response) {
-    const gsap = response
-    if (state.contactTimeline == null) {
-      console.log('Timeline à mettre bro')
-      commit('gsapContactTimeline', gsap)
-    } else {
-      console.log('Timeline OK')
-    }
-
-    if (!state.contactVisibility) {
-      console.log('Play')
-    } else {
-      console.log('Reverse')
-    }
-
     commit('ToggleContactVisibility')
   },
 }

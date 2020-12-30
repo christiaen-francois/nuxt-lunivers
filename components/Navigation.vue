@@ -1,6 +1,5 @@
 <template>
   <nav role="navigation" aria-label="Menu principal">
-    {{ contactVisibility }}
     <div class="nav-inner">
       <Logo />
       <div class="mobile-toggler" @click.prevent="menuToggle($event)">
@@ -249,7 +248,7 @@ nav {
   width: 100%;
   top: 0;
   left: 0;
-  padding: 1rem 1rem 0 1.5rem;
+  padding: 1.5rem 1.5rem 0 30px;
   z-index: 200;
 
   @include mq($from: small) {
@@ -264,14 +263,19 @@ nav {
   }
 
   .mobile-toggler {
-    position: relative;
     z-index: 11;
-    margin-right: 1.5rem;
     cursor: pointer;
     width: 2rem;
     height: 1.1rem;
 
+    @include mq($until: small) {
+      position: fixed;
+      bottom: 2rem;
+      left: 1.5rem;
+    }
+
     @include mq($from: small) {
+      position: relative;
       margin-right: 3rem;
     }
 
@@ -329,7 +333,6 @@ nav {
     width: 100%;
     min-height: 100vh;
     height: 100%;
-    background: rgba($color3, 0.95);
     padding: 0;
     margin: 0;
     opacity: 0;
@@ -394,6 +397,12 @@ nav {
   align-items: center;
   text-decoration: none;
 
+  @include mq($until: small) {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+  }
+
   .title-wrapper {
     position: relative;
     display: none;
@@ -432,12 +441,17 @@ nav {
     height: 54px;
     background-color: #fff;
     border-radius: 100%;
-    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
     margin-left: calc(16.6px + 0.14118vw);
     pointer-events: none;
     overflow: hidden;
     will-change: transform;
     transition: background-color 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+
+    @include mq($from: small) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 100%;
+    }
 
     .svg-wrapper {
       position: absolute;
