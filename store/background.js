@@ -5,7 +5,7 @@ export const state = () => ({
 export const mutations = {
   // methodName(state, payload)
   setSceneLoaded(state, payload) {
-    state.sceneLoaded = !state.sceneLoaded
+    state.sceneLoaded = payload
   },
 }
 

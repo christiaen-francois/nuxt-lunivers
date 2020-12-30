@@ -1,14 +1,13 @@
 <template>
   <article ref="someName" class="page-content">
-    <header class="">
+    <header class="header-full-height">
       <div class="container">
         <h1 class="title">Projets</h1>
       </div>
     </header>
     <section id="projets" class="section-py">
-      <div class="container">Projet</div>
+      <div class="container">Jolie liste des projets</div>
     </section>
-    <ProjectList />
     <PageFooter />
   </article>
 </template>

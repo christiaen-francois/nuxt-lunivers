@@ -2,7 +2,9 @@
   <article ref="someName" class="page-content">
     <header class="header-full-height">
       <div class="container container-xxl text-center">
-        <p class="h1">travailler avec finesse</p>
+        <ul>
+          <li v-for="(slogan, index) in slogans" :key="index">{{ slogan }}</li>
+        </ul>
       </div>
     </header>
     <section id="edito" class="section-py">
@@ -49,7 +51,7 @@ export default {
       pageTitle:
         'Agence de graphisme et création de sites web de caractère - Luxembourg',
       pageDescription: 'page desc',
-      wonders: [
+      slogans: [
         'œuvrer avec passion & finesse',
         'vous inspirer en offrant le meilleur',
         'participer à votre accomplissement',
@@ -77,5 +79,10 @@ export default {
   a {
     color: red;
   }
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 </style>

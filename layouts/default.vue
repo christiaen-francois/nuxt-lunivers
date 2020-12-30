@@ -23,7 +23,7 @@ export default {
   },
   watch: {
     sceneLoaded(newValue, oldValue) {
-      console.log(`Updating sceneLoaded from ${oldValue} to ${newValue}`)
+      // console.log(`Updating sceneLoaded from ${oldValue} to ${newValue}`)
       if (newValue === true) {
         this.pwtl.play()
       }

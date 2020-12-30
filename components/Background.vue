@@ -1,5 +1,5 @@
 <template>
-  <div if="luniversbg">{{ sceneLoaded }}</div>
+  <div id="luniversbg"></div>
 </template>
 
 <script>
@@ -48,6 +48,11 @@ export default {
     }),
   },
   mounted() {
+    const oCanvas = document.body.getElementsByTagName('canvas')[0]
+    if (typeof oCanvas !== 'undefined' && oCanvas != null) {
+      document.body.removeChild(oCanvas)
+    }
+
     this.$nextTick(function () {
       this.getWindowHeight()
     })
@@ -299,7 +304,7 @@ export default {
       this.windowHeight = document.documentElement.clientHeight
     },
     mySceneLoaded() {
-      this.setSceneLoaded()
+      this.setSceneLoaded(true)
     },
   },
 }
