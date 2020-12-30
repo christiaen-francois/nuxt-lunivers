@@ -71,6 +71,14 @@
                 >Projets</nuxt-link
               >
             </li>
+            <li class="menu-item">
+              <nuxt-link
+                to="/todo"
+                class="menu-link"
+                @click.native="menuToggle($event)"
+                >Todo</nuxt-link
+              >
+            </li>
           </ul>
         </div>
         <div class="col-xl-3 col-content col-content--coords mt-5 mb-xl-0">
@@ -331,8 +339,8 @@ nav {
     left: 0;
     display: none;
     width: 100%;
-    min-height: 100vh;
     height: 100%;
+    height: calc(var(--vh, 1vh) * 100);
     padding: 0;
     margin: 0;
     opacity: 0;

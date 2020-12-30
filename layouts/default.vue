@@ -30,12 +30,20 @@ export default {
     },
   },
   mounted() {
+    const root = document.documentElement
+    const vh =
+      Math.round(
+        document.documentElement.clientHeight || 0,
+        window.innerHeight || 0
+      ) / 100
     const pageWrapper = document.querySelector('.page-wrapper')
     this.pwtl = this.$gsap.timeline({ paused: true, reversed: true })
     this.pwtl.to(pageWrapper, {
       opacity: 1,
       duration: 1,
     })
+
+    root.style.setProperty('--vh', vh + 'px')
   },
 }
 </script>
