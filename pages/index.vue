@@ -46,17 +46,26 @@ export default {
   mixins: [global],
   data() {
     return {
+      pageTitle:
+        'Agence de graphisme et création de sites web de caractère - Luxembourg',
+      pageDescription: 'page desc',
       wonders: [
-        'travailler avec finesse',
-        'œuvrer avec passion',
-        'vous proproser le meilleur',
+        'œuvrer avec passion & finesse',
+        'vous inspirer en offrant le meilleur',
+        'participer à votre accomplissement',
       ],
     }
   },
   head() {
     return {
-      title:
-        'Agence de graphisme et création de sites web de caractère - Weiswampach',
+      title: this.pageTitle,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.pageDescription,
+        },
+      ],
     }
   },
 }

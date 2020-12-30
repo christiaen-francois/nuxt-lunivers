@@ -4,18 +4,16 @@
       <div class="page-footer-inner">
         <div class="row align-items-center">
           <div class="col-md-4 offset-md-1 mb-4 mb-md-0">
-            <h2>Houston nous avons la solution à votre problème.</h2>
+            <h2>Houston nous avons la solution à votre problème!</h2>
           </div>
           <div class="col-md-4 offset-md-2">
-            <a
-              href="#"
-              class="btn btn-primary"
+            <button
+              type="button"
+              class="btn btn-light btn-block btn-md-inline-block"
               @click.prevent="menuToggle($event)"
-              >Etablir le contact</a
             >
-            <p>
-              <small>Contact imminent.... Je répète, contact imminent!</small>
-            </p>
+              Etablir le contact...
+            </button>
           </div>
         </div>
       </div>
@@ -58,6 +56,9 @@ export default {
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     color: #000;
+    @include mq($until: medium) {
+      padding: 2rem;
+    }
   }
   a,
   h2 {
@@ -66,6 +67,9 @@ export default {
 
   h2 {
     margin: 0;
+    @include mq($until: small) {
+      font-size: 1.5rem;
+    }
   }
   address {
     margin: 0;

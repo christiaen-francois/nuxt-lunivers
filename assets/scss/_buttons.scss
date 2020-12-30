@@ -40,3 +40,19 @@
   background-color: transparent;
   border-color: transparent;
 }
+
+.btn-light {
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+
+    &::after {
+      background: $color2;
+      width: calc(100% + 10px);
+      left: -10px;
+    }
+  }
+}

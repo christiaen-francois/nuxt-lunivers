@@ -73,7 +73,9 @@
             </li>
           </ul>
         </div>
-        <div class="col-xl-3 col-content">Adresse</div>
+        <div class="col-xl-3 col-content col-content--coords mt-5 mb-xl-0">
+          <p>2 Duarrefstrooss <br />L-9990 Weiswampach <br />TVA: LU32261175</p>
+        </div>
       </div>
     </div>
     <div class="header-contact">
@@ -85,16 +87,13 @@
           frameborder="0"
           allow="camera; microphone; autoplay; encrypted-media;"
           src="https://form.typeform.com/to/UpLbrgsH?typeform-medium=embed-snippet"
-        ></iframe>
-        <script
-          type="text/javascript"
-          src="https://embed.typeform.com/embed.js"
-        ></script> -->
+        ></iframe> -->
       </div>
     </div>
   </nav>
 </template>
 <script>
+// https://dev.to/viniciuskneves/watch-for-vuex-state-changes-2mgj
 import { mapState, mapMutations } from 'vuex'
 
 export default {
@@ -149,7 +148,7 @@ export default {
     this.menutl.from(navigationContents, {
       opacity: 0,
       x: 50,
-      duration: 0.4,
+      duration: 0.2,
       stagger: 0.05,
     })
     this.menutl.from(navigationMenuItems, {
@@ -267,6 +266,7 @@ nav {
     cursor: pointer;
     width: 2rem;
     height: 1.1rem;
+    mix-blend-mode: difference;
 
     @include mq($until: small) {
       position: fixed;
@@ -353,9 +353,20 @@ nav {
   }
 
   .header-navigation {
+    overflow: hidden;
     overflow-y: scroll;
     -ms-flex-align: center;
     align-items: center;
+
+    @include mq($until: small) {
+      flex-direction: column !important;
+      text-align: center;
+
+      & > div {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+    }
 
     .menu-list {
       margin: 0;
@@ -375,9 +386,16 @@ nav {
         text-transform: lowercase;
         font-weight: 500;
 
-        &:hover {
-          color: transparent;
-          -webkit-text-stroke: 1.5px #fff;
+        &.nuxt-link-exact-active {
+          color: $color1;
+        }
+      }
+    }
+
+    .col-content {
+      &--coords {
+        @include mq($until: small) {
+          font-size: 0.9rem;
         }
       }
     }
@@ -405,14 +423,10 @@ nav {
 
   .title-wrapper {
     position: relative;
-    display: none;
-
-    @include mq($from: small) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 
     .title {
       display: block;
@@ -422,6 +436,7 @@ nav {
       pointer-events: none;
       transition: color 0.6s cubic-bezier(0.19, 1, 0.22, 1);
       will-change: transform;
+      mix-blend-mode: difference;
 
       &:last-of-type {
         position: absolute;
@@ -447,6 +462,7 @@ nav {
     overflow: hidden;
     will-change: transform;
     transition: background-color 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
 
     @include mq($from: small) {
       border-top-right-radius: 0;

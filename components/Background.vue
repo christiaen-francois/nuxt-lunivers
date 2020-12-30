@@ -1,8 +1,9 @@
 <template>
-  <div if="luniversbg"></div>
+  <div if="luniversbg">{{ sceneLoaded }}</div>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 import * as THREE from '~/node_modules/three/build/three.module.js'
 export default {
   components: {},
@@ -37,7 +38,14 @@ export default {
       materials: [],
       cube: null,
       sphere: null,
+      gsap: null,
+      maintl: null,
     }
+  },
+  computed: {
+    ...mapState({
+      sceneLoaded: (state) => state.background.sceneLoaded,
+    }),
   },
   mounted() {
     this.$nextTick(function () {
@@ -60,7 +68,32 @@ export default {
     // console.log("created", 'created called.');
   },
   methods: {
+    ...mapMutations('background', ['setSceneLoaded']),
     init() {
+      const manager = new THREE.LoadingManager()
+
+      manager.onStart = function (item, loaded, total) {
+        // console.log('Loading started')
+      }
+
+      manager.onProgress = function (item, loaded, total) {
+        // console.log(item, loaded, total)
+        // console.log('Loaded:', Math.round((loaded / total) * 100, 2) + '%')
+        // bar.animate(1.0)
+        //
+      }
+
+      const comp = this
+
+      manager.onLoad = function () {
+        // console.log('Loading complete', document.querySelector('.page-wrapper'))
+        // bar.destroy()
+        comp.mySceneLoaded()
+      }
+
+      manager.onError = function (url) {
+        // console.log('Error loading')
+      }
       // console.log("mounted", "init");
       // $(".starfield").starfield();
       // var plscene = document.getElementById("scene");
@@ -90,7 +123,7 @@ export default {
       const geometry = new THREE.BufferGeometry()
       const vertices = []
 
-      const textureLoader = new THREE.TextureLoader()
+      const textureLoader = new THREE.TextureLoader(manager)
 
       const sprite1 = textureLoader.load('/img/tex1.png')
       const sprite2 = textureLoader.load('/img/tex2.png')
@@ -165,7 +198,8 @@ export default {
       this.bg_camera = new THREE.Camera()
       // camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,.1,1000);
       // camera.position.z = 0;
-      this.bg_texture = THREE.ImageUtils.loadTexture('/img/bg-2.jpg', {})
+      // this.bg_texture = THREE.ImageUtils.loadTexture('/img/bg-2.jpg', {})
+      this.bg_texture = new THREE.TextureLoader(manager).load('/img/bg-2.jpg')
       this.MeshLambertMaterial = new THREE.MeshLambertMaterial({
         map: this.bg_texture,
       })
@@ -263,6 +297,9 @@ export default {
     },
     getWindowHeight(event) {
       this.windowHeight = document.documentElement.clientHeight
+    },
+    mySceneLoaded() {
+      this.setSceneLoaded()
     },
   },
 }
