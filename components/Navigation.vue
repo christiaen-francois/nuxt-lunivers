@@ -348,10 +348,6 @@ nav {
   }
   .header-contact {
     z-index: 12;
-
-    @include mq($until: small) {
-      padding-bottom: 3rem;
-    }
     & > div,
     iframe {
       height: 100%;
@@ -423,12 +419,6 @@ nav {
   align-items: center;
   text-decoration: none;
 
-  @include mq($until: small) {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-  }
-
   .title-wrapper {
     position: relative;
     display: flex;
@@ -464,18 +454,13 @@ nav {
     height: 54px;
     background-color: #fff;
     border-radius: 100%;
-    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
     margin-left: calc(16.6px + 0.14118vw);
     pointer-events: none;
     overflow: hidden;
     will-change: transform;
     transition: background-color 0.6s cubic-bezier(0.19, 1, 0.22, 1);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-
-    @include mq($from: small) {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 100%;
-    }
 
     .svg-wrapper {
       position: absolute;
