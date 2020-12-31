@@ -41,6 +41,7 @@ export default {
       sphere: null,
       gsap: null,
       maintl: null,
+      greatLogo: null,
     }
   },
   computed: {
@@ -198,25 +199,26 @@ export default {
 
       loader.load('/img/lunivers-small.svg', function (data) {
         const paths = data.paths
-        console.log('paths', paths)
-        const group = new THREE.Group()
-        group.scale.multiplyScalar(4.25)
-        group.position.x = -630
-        group.position.y = 630
-        group.scale.y *= -1
+        // console.log('paths', paths)
+        comp.greatLogo = new THREE.Group()
+        comp.greatLogo.scale.multiplyScalar(3.25)
+        comp.greatLogo.position.x = -490
+        comp.greatLogo.position.y = 490
+        comp.greatLogo.scale.y *= -1
 
         for (let i = 0; i < paths.length; i++) {
           const path = paths[i]
 
           // const fillColor = path.userData.style.fill
-          const strokeColor = path.userData.style.stroke
-          console.log('style', path.userData.style)
+          const strokeColor = '#fff' // path.userData.style.stroke
+          const strokeOpacity = '0.5' // path.userData.style.strokeOpacity
+          // console.log('style', path.userData.style)
 
           if (strokeColor !== undefined && strokeColor !== 'none') {
             const material = new THREE.MeshBasicMaterial({
               color: new THREE.Color().setStyle(strokeColor),
-              opacity: path.userData.style.strokeOpacity,
-              transparent: path.userData.style.strokeOpacity < 1,
+              opacity: strokeOpacity,
+              transparent: strokeOpacity < 1,
               side: THREE.DoubleSide,
               depthWrite: false,
               wireframe: false,
@@ -232,13 +234,13 @@ export default {
               if (geometry) {
                 const mesh = new THREE.Mesh(geometry, material)
 
-                group.add(mesh)
+                comp.greatLogo.add(mesh)
               }
             }
           }
         }
-        console.log(group)
-        comp.scene.add(group)
+        // console.log(group)
+        comp.scene.add(comp.greatLogo)
       })
 
       //
