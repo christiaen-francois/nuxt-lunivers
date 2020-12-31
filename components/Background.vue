@@ -40,8 +40,15 @@ export default {
       cube: null,
       sphere: null,
       gsap: null,
+      ScrollTrigger: null,
       maintl: null,
       greatLogo: null,
+      scrollEvent: {
+        y: 0,
+        deltaY: 0,
+      },
+      maxHeight: null,
+      scrollY: 0,
     }
   },
   computed: {
@@ -55,6 +62,10 @@ export default {
       document.body.removeChild(oCanvas)
     }
 
+    this.gsap = this.$gsap
+    this.ScrollTrigger = this.$ScrollTrigger
+    this.gsap.registerPlugin(this.ScrollTrigger)
+
     this.$nextTick(function () {
       this.getWindowHeight()
     })
@@ -66,10 +77,13 @@ export default {
     this.center.x = this.windowHalfX
     this.center.y = this.windowHalfY
 
+    this.maxHeight =
+      (document.body.clientHeight || document.body.offsetHeight) -
+      window.innerHeight
+
     // console.log("muntd", [this.windowHalfX, this.windowHalfY, this.center.x, this.center.y]);
 
     this.init()
-    this.animate()
   },
   created() {
     // console.log("created", 'created called.');
@@ -77,25 +91,25 @@ export default {
   methods: {
     ...mapMutations('background', ['setSceneLoaded']),
     init() {
-      const manager = new THREE.LoadingManager()
+      const comp = this
+      const manager = new THREE.LoadingManager(comp.animateOnScroll)
 
       manager.onStart = function (item, loaded, total) {
         // console.log('Loading started')
       }
 
       manager.onProgress = function (item, loaded, total) {
-        // console.log(item, loaded, total)
-        // console.log('Loaded:', Math.round((loaded / total) * 100, 2) + '%')
+        console.log(item, loaded, total)
+        console.log('Loaded:', Math.round((loaded / total) * 100, 2) + '%')
         // bar.animate(1.0)
         //
       }
 
-      const comp = this
-
       manager.onLoad = function () {
-        // console.log('Loading complete', document.querySelector('.page-wrapper'))
+        console.log('Loading complete', comp.scene.render)
         // bar.destroy()
         comp.mySceneLoaded()
+        comp.animateOnScroll()
       }
 
       manager.onError = function (url) {
@@ -195,15 +209,19 @@ export default {
 
       // SVG !
 
+      // GSAP Timeline
+
       const loader = new SVGLoader(manager)
+      this.greatLogo = new THREE.Group()
 
       loader.load('/img/lunivers-small.svg', function (data) {
         const paths = data.paths
         // console.log('paths', paths)
-        comp.greatLogo = new THREE.Group()
+        // comp.greatLogo = new THREE.Group()
         comp.greatLogo.scale.multiplyScalar(3.25)
         comp.greatLogo.position.x = -490
         comp.greatLogo.position.y = 490
+        comp.greatLogo.position.z = 0
         comp.greatLogo.scale.y *= -1
 
         for (let i = 0; i < paths.length; i++) {
@@ -245,12 +263,13 @@ export default {
 
       //
 
-      document.body.style.touchAction = 'none'
+      // document.body.style.touchAction = 'none'
       document.body.addEventListener('pointermove', this.onPointerMove, false)
+      document.body.addEventListener('wheel', this.onWheel, { passive: false })
 
       this.renderer = new THREE.WebGLRenderer({
-        alpha: !1,
-        antialias: !1,
+        alpha: true,
+        antialias: true,
         precision: 'lowp',
       })
       this.renderer.setPixelRatio(window.devicePixelRatio)
@@ -294,6 +313,8 @@ export default {
 
       document.body.appendChild(this.renderer.domElement)
 
+      this.animate()
+
       //
 
       window.addEventListener('resize', this.onWindowResize, false)
@@ -329,6 +350,7 @@ export default {
       this.render()
     },
     render() {
+      // const percentage = this.lerp(percentage, -_event.y, 0.07)
       const time = Date.now() * 0.00005
 
       this.renderer.autoClear = !1
@@ -345,6 +367,8 @@ export default {
 
       this.camera.lookAt(this.wrap.position)
 
+      // this.greatLogo.position.z = -500
+
       for (let i = 0; i < this.scene.children.length; i++) {
         const object = this.scene.children[i]
 
@@ -359,12 +383,75 @@ export default {
       // this.cube.rotation.z += 0.002
 
       this.renderer.render(this.scene, this.camera)
+
+      // this.animateOnScroll()
     },
     getWindowHeight(event) {
       this.windowHeight = document.documentElement.clientHeight
     },
     mySceneLoaded() {
       this.setSceneLoaded(true)
+      // this.animateOnScroll()
+    },
+    onWheel(e) {
+      // for embedded demo
+      e.stopImmediatePropagation()
+      // e.preventDefault()
+      e.stopPropagation()
+
+      const evt = this.scrollEvent
+      evt.deltaY = e.wheelDeltaY || e.deltaY * -1
+      // reduce by half the delta amount otherwise it scroll too fast
+      evt.deltaY *= 0.5
+
+      this.scroll(e)
+    },
+    scroll(e) {
+      const evt = this.scrollEvent
+      // limit scroll top
+      if (evt.y + evt.deltaY > 0) {
+        evt.y = 0
+        // limit scroll bottom
+      } else if (-(evt.y + evt.deltaY) >= this.maxHeight) {
+        evt.y = -this.maxHeight
+      } else {
+        evt.y += evt.deltaY
+      }
+      this.scrollY = -evt.y
+    },
+    lerp(a, b, t) {
+      return (1 - t) * a + t * b
+    },
+    animateOnScroll() {
+      console.log('animateOnScroll', this.greatLogo.position)
+      // this.onWindowResize()
+      // this.ScrollTrigger.refresh()
+      // const sectionDuration = 1
+
+      const tl = this.gsap.timeline({
+        // ease: 'circ.inOut',
+        // onUpdate: this.scene.render,
+        scrollTrigger: {
+          scrub: 0.6,
+          trigger: '.header-full-height',
+          start: 'bottom bottom',
+          end: 'bottom 50%',
+          markers: {
+            startColor: '#01C8EE',
+            endColor: '#EE2E7C',
+            fontSize: '10px',
+            fontWeight: 'normal',
+            indent: 20,
+          },
+        },
+        defaults: {
+          immediateRender: false,
+          // ease: 'power1.inOut',
+        },
+      })
+      // this.ScrollTrigger.refresh()
+      const delay = 0.15
+      tl.to(this.greatLogo.position, { z: -1100 }, delay)
     },
   },
 }
