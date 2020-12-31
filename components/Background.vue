@@ -5,6 +5,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 import * as THREE from '~/node_modules/three/build/three.module.js'
+import { SVGLoader } from '~/node_modules/three/examples/jsm/loaders/SVGLoader.js'
 export default {
   components: {},
   data() {
@@ -123,7 +124,12 @@ export default {
       this.scene = new THREE.Scene()
       this.wrap = new THREE.Group()
       this.scene.add(this.wrap)
-      this.scene.fog = new THREE.FogExp2(10842, 0.00025)
+      this.scene.fog = new THREE.FogExp2(10842, 0.00125)
+
+      // Helper
+      // const helper = new THREE.GridHelper(1600, 10)
+      // helper.rotation.x = Math.PI / 2
+      // this.scene.add(helper)
 
       const geometry = new THREE.BufferGeometry()
       const vertices = []
@@ -177,11 +183,63 @@ export default {
         this.scene.add(particles)
       }
 
-      // this.cube = new THREE.Mesh( new THREE.CubeGeometry( 50, 50, 50 ), new THREE.MeshNormalMaterial() );
+      // this.cube = new THREE.Mesh(
+      //   new THREE.CubeGeometry(500, 500, 500),
+      //   new THREE.MeshNormalMaterial()
+      // )
       // this.cube.position.y = 0
       // this.cube.position.z = 0
       // this.cube.position.x = 0
-      // this.scene.add(this.cube);
+      // this.scene.add(this.cube)
+
+      // SVG !
+
+      const loader = new SVGLoader(manager)
+
+      loader.load('/img/lunivers-small.svg', function (data) {
+        const paths = data.paths
+        console.log('paths', paths)
+        const group = new THREE.Group()
+        group.scale.multiplyScalar(4.25)
+        group.position.x = -630
+        group.position.y = 630
+        group.scale.y *= -1
+
+        for (let i = 0; i < paths.length; i++) {
+          const path = paths[i]
+
+          // const fillColor = path.userData.style.fill
+          const strokeColor = path.userData.style.stroke
+          console.log('style', path.userData.style)
+
+          if (strokeColor !== undefined && strokeColor !== 'none') {
+            const material = new THREE.MeshBasicMaterial({
+              color: new THREE.Color().setStyle(strokeColor),
+              opacity: path.userData.style.strokeOpacity,
+              transparent: path.userData.style.strokeOpacity < 1,
+              side: THREE.DoubleSide,
+              depthWrite: false,
+              wireframe: false,
+            })
+            for (let j = 0, jl = path.subPaths.length; j < jl; j++) {
+              const subPath = path.subPaths[j]
+
+              const geometry = SVGLoader.pointsToStroke(
+                subPath.getPoints(),
+                path.userData.style
+              )
+
+              if (geometry) {
+                const mesh = new THREE.Mesh(geometry, material)
+
+                group.add(mesh)
+              }
+            }
+          }
+        }
+        console.log(group)
+        comp.scene.add(group)
+      })
 
       //
 
@@ -294,9 +352,9 @@ export default {
       }
 
       // animer le cube
-      // this.sphere.rotation.x += 0.01
-      // this.sphere.rotation.y += 0.0025
-      // this.sphere.rotation.z += 0.002
+      // this.cube.rotation.x += 0.01
+      // this.cube.rotation.y += 0.0025
+      // this.cube.rotation.z += 0.002
 
       this.renderer.render(this.scene, this.camera)
     },
