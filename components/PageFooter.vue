@@ -3,13 +3,13 @@
     <div class="container">
       <div class="page-footer-inner">
         <div class="row align-items-center">
-          <div class="col-md-5 offset-md-1 mb-4 mb-md-0">
+          <div class="col-md-5 offset-md-1 order-2 order-md-1">
             <h2>Houston nous avons la solution à votre problème!</h2>
           </div>
-          <div class="col-md-4 offset-md-1">
+          <div class="col-md-4 offset-md-1 mb-4 mb-md-0 order-1 order-md-2">
             <button
               type="button"
-              class="btn btn-light btn-block btn-md-inline-block"
+              class="btn btn-light btn-block btn-md-inline-block btn-lg"
               @click.prevent="menuToggle($event)"
             >
               Etablir le contact...
@@ -94,6 +94,7 @@ export default {
     color: #000;
     @include mq($until: medium) {
       padding: 2rem;
+      text-align: center;
     }
   }
   a,

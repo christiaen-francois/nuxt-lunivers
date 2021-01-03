@@ -109,10 +109,14 @@ export default {
   list-style: none;
 
   li {
-    font-size: 3rem;
+    font-size: 1.7rem;
     font-weight: 200;
     line-height: 1;
     margin: 1.5rem 0;
+
+    @include mq($from: large) {
+      font-size: 3rem;
+    }
 
     &:first-child {
       margin-top: 0;

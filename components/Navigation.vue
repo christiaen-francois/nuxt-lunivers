@@ -249,6 +249,7 @@ nav {
   left: 0;
   padding: 1.5rem 1.5rem 0 30px;
   z-index: 200;
+  @include transitionPrefixMultiple(0.2s, all);
 
   @include mq($from: small) {
     padding: 2rem 2rem 0 2rem;
@@ -267,6 +268,7 @@ nav {
     width: 2rem;
     height: 1.1rem;
     mix-blend-mode: difference;
+    @include transitionPrefixMultiple(0.2s, all);
 
     @include mq($until: small) {
       position: fixed;
@@ -337,6 +339,7 @@ nav {
     margin: 0;
     opacity: 0;
     z-index: 10;
+    @include transitionPrefixMultiple(0.2s, all);
   }
   .header-contact {
     z-index: 12;
@@ -410,6 +413,7 @@ nav {
   display: flex;
   align-items: center;
   text-decoration: none;
+  @include transitionPrefixMultiple(0.2s, all);
 
   .title-wrapper {
     position: relative;
