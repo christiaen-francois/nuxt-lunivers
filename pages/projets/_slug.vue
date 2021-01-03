@@ -1,9 +1,11 @@
 <template>
-  <article ref="someName" class="page-content">
+  <article ref="pageContent" class="page-content single-project">
     <header class="header-full-height">
       <div class="container">
         <h1 class="title">{{ projet.name }}</h1>
-        <nuxt-link class="btn btn-primary" to="/projets">Projets</nuxt-link>
+      </div>
+      <div class="header-image">
+        <img :src="projet.images.featured" :alt="projet.name" />
       </div>
     </header>
     <PageFooter />
@@ -31,4 +33,20 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.header-full-height {
+  .header-image {
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+</style>

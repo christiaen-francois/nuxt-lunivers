@@ -1,12 +1,12 @@
 <template>
-  <footer class="page-footer">
-    <div class="container-fluid">
+  <footer ref="pageFooter" class="page-footer">
+    <div class="container">
       <div class="page-footer-inner">
         <div class="row align-items-center">
-          <div class="col-md-4 offset-md-1 mb-4 mb-md-0">
+          <div class="col-md-5 offset-md-1 mb-4 mb-md-0">
             <h2>Houston nous avons la solution à votre problème!</h2>
           </div>
-          <div class="col-md-4 offset-md-2">
+          <div class="col-md-4 offset-md-1">
             <button
               type="button"
               class="btn btn-light btn-block btn-md-inline-block"
@@ -27,17 +27,53 @@ import footerAnim from '~/mixins/footerAnim.js'
 export default {
   name: 'PageFooter',
   mixins: [footerAnim],
+  data() {
+    return {
+      pageContactPanelTimeline: null,
+    }
+  },
   computed: {
     ...mapState({
       menuVisibility: (state) => state.navigation.menuVisibility,
       contactVisibility: (state) => state.navigation.contactVisibility,
+      overlayOpen: (state) => state.navigation.overlayOpen,
     }),
+  },
+  watch: {
+    overlayOpen(newValue, oldValue) {
+      this.toggleContactPanelVisibility(newValue)
+      // console.log(`Updating from ${oldValue} to ${newValue}`)
+    },
+  },
+  mounted() {
+    this.$nextTick(
+      function () {
+        const pageFooter = this.$refs.pageFooter
+
+        this.pageContactPanelTimeline = this.$gsap.timeline({
+          paused: true,
+          reversed: true,
+        })
+        this.pageContactPanelTimeline.to(pageFooter, {
+          opacity: 0,
+          duration: 0.2,
+        })
+      }.bind(this)
+    )
   },
   methods: {
     ...mapMutations('navigation', ['ToggleContactVisibility']), // https://stackoverflow.com/questions/60335163/how-to-correctly-use-nuxt-vue-mapmutations
     ...mapActions('navigation', ['ToggleContactVisibilityAction']),
     menuToggle(event) {
       this.ToggleContactVisibilityAction()
+    },
+    toggleContactPanelVisibility(nv) {
+      // console.log('toggleContactPanelVisibility', nv)
+      if (nv) {
+        this.pageContactPanelTimeline.play()
+      } else {
+        this.pageContactPanelTimeline.reverse()
+      }
     },
   },
 }

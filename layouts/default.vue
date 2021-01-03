@@ -2,6 +2,7 @@
   <main id="js-scroll" rel="mainContent" class="page-wrapper">
     <Navigation />
     <Nuxt />
+    <PageFooter />
     <Background />
   </main>
 </template>
@@ -30,20 +31,26 @@ export default {
     },
   },
   mounted() {
-    const root = document.documentElement
-    const vh =
-      Math.round(
-        document.documentElement.clientHeight || 0,
-        window.innerHeight || 0
-      ) / 100
     const pageWrapper = document.querySelector('.page-wrapper')
     this.pwtl = this.$gsap.timeline({ paused: true, reversed: true })
     this.pwtl.to(pageWrapper, {
       opacity: 1,
       duration: 1,
     })
+    this.setRootVars()
+    window.addEventListener('resize', this.setRootVars, false)
+  },
+  methods: {
+    setRootVars() {
+      const root = document.documentElement
+      const vh =
+        Math.round(
+          document.documentElement.clientHeight || 0,
+          window.innerHeight || 0
+        ) / 100
 
-    root.style.setProperty('--vh', vh + 'px')
+      root.style.setProperty('--vh', vh + 'px')
+    },
   },
 }
 </script>

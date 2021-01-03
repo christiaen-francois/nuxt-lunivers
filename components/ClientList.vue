@@ -1,22 +1,13 @@
 <template>
   <div data-scroll-section>
-    <div class="container">
-      <div class="content-with-caption">
-        <p
-          class="content-caption fade-in-up-osc"
-          data-scroll
-          data-scroll-speed="1"
-        >
-          <span>étoiles</span>
-        </p>
-        <ul class="client-list">
-          <li v-for="client in clients" :key="client.name">
-            <div class="list-item">
-              <img :src="client.logo" :alt="client.name" />
-            </div>
-          </li>
-        </ul>
-      </div>
+    <div class="container container-xxl">
+      <ul class="client-list">
+        <li v-for="client in clients" :key="client.name">
+          <div class="list-item fade-in-up-osc">
+            <img :src="client.logo" :alt="client.name" />
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>

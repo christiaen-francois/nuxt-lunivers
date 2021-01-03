@@ -52,31 +52,23 @@
                 to="/"
                 class="menu-link"
                 @click.native="menuToggle($event)"
-                >Accueil</nuxt-link
-              >
-            </li>
-            <li class="menu-item">
-              <nuxt-link
-                to="/studio"
-                class="menu-link"
-                @click.native="menuToggle($event)"
                 >Studio</nuxt-link
               >
             </li>
             <li class="menu-item">
               <nuxt-link
-                to="/projets"
+                to="/clients"
                 class="menu-link"
                 @click.native="menuToggle($event)"
-                >Projets</nuxt-link
+                >Clients</nuxt-link
               >
             </li>
             <li class="menu-item">
               <nuxt-link
-                to="/todo"
+                to="/carriere"
                 class="menu-link"
                 @click.native="menuToggle($event)"
-                >Todo</nuxt-link
+                >Carriere</nuxt-link
               >
             </li>
           </ul>

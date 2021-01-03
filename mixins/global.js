@@ -19,7 +19,8 @@ export default {
     this.$nextTick(
       function () {
         this.initAnimation()
-        const pageContent = this.$refs.someName
+        const pageContent = this.$refs.pageContent
+        const pageFooter = this.$refs.pageFooter
 
         this.pageContentTimeline = this.$gsap.timeline({
           paused: true,
@@ -29,6 +30,14 @@ export default {
           opacity: 0,
           duration: 0.2,
         })
+        this.pageContentTimeline.to(
+          pageFooter,
+          {
+            opacity: 0,
+            duration: 0.2,
+          },
+          '-=0.2'
+        )
       }.bind(this)
     )
   },
@@ -59,9 +68,9 @@ export default {
 
       this.elinviews.forEach((inview) => {
         this.gsap.from(inview, {
-          opacity: 0,
+          opacity: 0.1,
           y: 50,
-          duration: 0.5,
+          duration: 0.2,
           //   ease: 'circ.inOut',
           scrollTrigger: {
             id: 'ScrollTrigger',
@@ -74,6 +83,23 @@ export default {
           },
         })
       })
+      if (this.$refs.homeTitle) {
+        this.gsap.to(this.$refs.homeTitle, {
+          opacity: 0,
+          y: -50,
+          duration: 0.2,
+          //   ease: 'circ.inOut',
+          scrollTrigger: {
+            id: 'MainTitle In',
+            scrub: 0.5,
+            // once: true,
+            trigger: this.$refs.homeTitle,
+            start: 'top 20%',
+            end: 'top top',
+            // markers: this.markers,
+          },
+        })
+      }
     },
     refreshAnimation() {
       this.ScrollTrigger.refresh()
@@ -85,7 +111,7 @@ export default {
       })
     },
     toggleContentVisibility(nv) {
-      console.log('toggleContentVisibility', nv)
+      // console.log('toggleContentVisibility', nv)
       if (nv) {
         this.pageContentTimeline.play()
       } else {

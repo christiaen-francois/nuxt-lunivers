@@ -17,6 +17,7 @@ export default {
     this.$nextTick(
       function () {
         this.initAnimation()
+        // console.log('ticked')
       }.bind(this)
     )
   },
@@ -31,34 +32,34 @@ export default {
   },
   methods: {
     initAnimation() {
-      this.gsap = this.$gsap
-      this.ScrollTrigger = this.$ScrollTrigger
-      this.gsap.registerPlugin(this.ScrollTrigger)
-
-      this.gsap.from('.page-footer .page-footer-inner', {
-        opacity: 0,
-        y: 100,
-        delay: 0.5,
-        duration: 0.5,
-        // ease: 'circ.inOut',
-        scrollTrigger: {
-          // once: true,
-          id: 'footerTrigger',
-          trigger: '.page-footer .page-footer-inner',
-          start: 'top bottom',
-          end: 'bottom bottom',
-          // markers: this.markers,
-        },
-      })
+      // this.gsap = this.$gsap
+      // this.ScrollTrigger = this.$ScrollTrigger
+      // this.gsap.registerPlugin(this.ScrollTrigger)
+      // this.gsap.from('.page-footer .page-footer-inner', {
+      //   opacity: 0,
+      //   y: 100,
+      //   delay: 0.5,
+      //   duration: 0.5,
+      //   // ease: 'circ.inOut',
+      //   scrollTrigger: {
+      //     // once: true,
+      //     id: 'footerTrigger',
+      //     trigger: '.page-footer .page-footer-inner',
+      //     start: 'top bottom',
+      //     end: 'bottom bottom',
+      //     // markers: this.markers,
+      //   },
+      // })
     },
     refreshAnimation() {
-      this.ScrollTrigger.refresh()
+      // console.log('this.refreshAnimation()')
+      // this.ScrollTrigger.refresh()
     },
     destroyAnimation() {
-      const triggers = this.ScrollTrigger.getAll()
-      triggers.forEach((trigger) => {
-        trigger.kill()
-      })
+      // const triggers = this.ScrollTrigger.getAll()
+      // triggers.forEach((trigger) => {
+      //   trigger.kill()
+      // })
     },
   },
 }

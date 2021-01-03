@@ -62,9 +62,9 @@ export default {
       document.body.removeChild(oCanvas)
     }
 
-    this.gsap = this.$gsap
-    this.ScrollTrigger = this.$ScrollTrigger
-    this.gsap.registerPlugin(this.ScrollTrigger)
+    // this.gsap = this.$gsap
+    // this.ScrollTrigger = this.$ScrollTrigger
+    // this.gsap.registerPlugin(this.ScrollTrigger)
 
     this.$nextTick(function () {
       this.getWindowHeight()
@@ -92,24 +92,24 @@ export default {
     ...mapMutations('background', ['setSceneLoaded']),
     init() {
       const comp = this
-      const manager = new THREE.LoadingManager(comp.animateOnScroll)
+      const manager = new THREE.LoadingManager()
 
       manager.onStart = function (item, loaded, total) {
         // console.log('Loading started')
       }
 
       manager.onProgress = function (item, loaded, total) {
-        console.log(item, loaded, total)
-        console.log('Loaded:', Math.round((loaded / total) * 100, 2) + '%')
+        // console.log(item, loaded, total)
+        // console.log('Loaded:', Math.round((loaded / total) * 100, 2) + '%')
         // bar.animate(1.0)
         //
       }
 
       manager.onLoad = function () {
-        console.log('Loading complete', comp.scene.render)
+        // console.log('Loading complete', comp.scene.render)
         // bar.destroy()
         comp.mySceneLoaded()
-        comp.animateOnScroll()
+        // comp.animateOnScroll()
       }
 
       manager.onError = function (url) {
@@ -195,7 +195,7 @@ export default {
         particles.rotation.y = Math.random(-180, 180) * 6
         particles.rotation.z = Math.random(-180, 180) * 6
 
-        this.scene.add(particles)
+        // this.scene.add(particles)
       }
 
       // this.cube = new THREE.Mesh(
@@ -229,7 +229,7 @@ export default {
 
           // const fillColor = path.userData.style.fill
           const strokeColor = '#fff' // path.userData.style.stroke
-          const strokeOpacity = '0.5' // path.userData.style.strokeOpacity
+          const strokeOpacity = '0.2' // path.userData.style.strokeOpacity
           // console.log('style', path.userData.style)
 
           if (strokeColor !== undefined && strokeColor !== 'none') {
@@ -265,7 +265,7 @@ export default {
 
       // document.body.style.touchAction = 'none'
       document.body.addEventListener('pointermove', this.onPointerMove, false)
-      document.body.addEventListener('wheel', this.onWheel, { passive: false })
+      // document.body.addEventListener('wheel', this.onWheel, { passive: false })
 
       this.renderer = new THREE.WebGLRenderer({
         alpha: true,
@@ -423,7 +423,7 @@ export default {
       return (1 - t) * a + t * b
     },
     animateOnScroll() {
-      console.log('animateOnScroll', this.greatLogo.position)
+      // console.log('animateOnScroll', this.greatLogo.position)
       // this.onWindowResize()
       // this.ScrollTrigger.refresh()
       // const sectionDuration = 1

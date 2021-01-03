@@ -1,5 +1,5 @@
 <template>
-  <article ref="someName" class="page-content">
+  <article ref="pageContent" class="page-content">
     <header class="header-full-height">
       <div class="container">
         <h1 class="title">Projets</h1>
