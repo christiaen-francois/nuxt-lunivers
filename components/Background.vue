@@ -195,7 +195,7 @@ export default {
         particles.rotation.y = Math.random(-180, 180) * 6
         particles.rotation.z = Math.random(-180, 180) * 6
 
-        // this.scene.add(particles)
+        this.scene.add(particles)
       }
 
       // this.cube = new THREE.Mesh(

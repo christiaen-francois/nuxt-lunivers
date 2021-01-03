@@ -28,6 +28,9 @@
               univers... Le file conducteur idéal qui fera de notre
               collaboration une histoire couronnée de réussites.
             </p>
+            <nuxt-link class="btn btn-primary" to="/carriere">
+              Rejoindre l'équipe</nuxt-link
+            >
           </div>
         </div>
         <div class="row section-py pb-0">

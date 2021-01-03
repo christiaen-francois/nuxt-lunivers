@@ -64,45 +64,36 @@
           </div>
         </div>
 
-        <div
-          class="typeform-widget"
-          data-url="https://form.typeform.com/to/cY1PSEvQ?typeform-medium=embed-snippet"
-          data-transparency="100"
-          data-hide-headers="false"
-          data-hide-footer="false"
-          style="width: 100%; height: 500px"
-        ></div>
-        <script>
-          ;(function () {
-            var qs,
-              js,
-              q,
-              s,
-              d = document,
-              gi = d.getElementById,
-              ce = d.createElement,
-              gt = d.getElementsByTagName,
-              id = 'typef_orm',
-              b = 'https://embed.typeform.com/'
-            if (!gi.call(d, id)) {
-              js = ce.call(d, 'script')
-              js.id = id
-              js.src = b + 'embed.js'
-              q = gt.call(d, 'script')[0]
-              q.parentNode.insertBefore(js, q)
-            }
-          })()
-        </script>
+        <button
+          type="button"
+          class="btn btn-light btn-block btn-md-inline-block btn-lg"
+          @click.prevent="contactToggle($event)"
+        >
+          Postuler
+        </button>
       </div>
     </section>
   </article>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import global from '~/mixins/global.js'
 export default {
   name: 'Carriere',
   mixins: [global],
+  methods: {
+    ...mapMutations('navigation', [
+      'ToggleContactVisibility',
+      'changeTypeFormUrl',
+    ]), // https://stackoverflow.com/questions/60335163/how-to-correctly-use-nuxt-vue-mapmutations
+    contactToggle(event) {
+      this.changeTypeFormUrl(
+        'https://form.typeform.com/to/cY1PSEvQ?typeform-medium=embed-snippet'
+      )
+      this.ToggleContactVisibility()
+    },
+  },
   head() {
     return {
       title: 'Carrière',

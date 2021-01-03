@@ -80,14 +80,14 @@
     </div>
     <div class="header-contact">
       <div class="header-contact-inner">
-        <!-- <iframe
+        <iframe
           id="typeform-full"
           width="100%"
           height="100%"
           frameborder="0"
           allow="camera; microphone; autoplay; encrypted-media;"
-          src="https://form.typeform.com/to/UpLbrgsH?typeform-medium=embed-snippet"
-        ></iframe> -->
+          :src="typeFormUrl"
+        ></iframe>
       </div>
     </div>
   </nav>
@@ -102,14 +102,14 @@ export default {
     return {
       menutl: null,
       contacttl: null,
-      typeForm:
-        'https://form.typeform.com/to/UpLbrgsH?typeform-medium=embed-snippet',
+      typeForm: null,
     }
   },
   computed: {
     ...mapState({
       menuVisibility: (state) => state.navigation.menuVisibility,
       contactVisibility: (state) => state.navigation.contactVisibility,
+      typeFormUrl: (state) => state.navigation.typeFormUrl,
     }),
   },
   watch: {
@@ -215,6 +215,7 @@ export default {
     ...mapMutations('navigation', [
       'ToggleMenuVisibility',
       'ToggleContactVisibility',
+      'changeTypeFormUrl',
     ]), // https://stackoverflow.com/questions/60335163/how-to-correctly-use-nuxt-vue-mapmutations
     menuToggle(event) {
       const toggleBtn = document.querySelector('.mobile-toggler-btn')
@@ -229,6 +230,9 @@ export default {
       this.bodyOverflow()
     },
     contactToggle(event) {
+      this.changeTypeFormUrl(
+        'https://form.typeform.com/to/UpLbrgsH?typeform-medium=embed-snippet'
+      )
       this.ToggleContactVisibility()
     },
     bodyOverflow() {
