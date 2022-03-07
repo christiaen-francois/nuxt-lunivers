@@ -51,7 +51,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "fibers": "^5.0.0",
     "husky": "^4.3.8",
-    "lint-staged": "^10.4.0",
+    "lint-staged": "^12.3.5",
     "nuxt-gsap-module": "^1.1.1",
     "prettier": "^2.1.2",
     "pug": "^3.0.0",
